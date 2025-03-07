@@ -35,3 +35,5 @@ Larry Liu - [ROLE]
   
 Mason Lemberger - [Systems Architect & Notetaker]
 - Issues:
++ UI Issue: Analytics and History Page
++ Data Issue: Job Type
