@@ -19,11 +19,14 @@ Issues:
 + Data Issue: Job_Results Data Type
 + Team Issue: Scrum Master + Project Manager
   
-Hoa La - [QA Lead & Mediator]
-- Issues: 
+Hoa La - "QA Lead & Mediator"
+
+Issues: 
 + UI Issue: Login page 
 + Data Issue: Account Data type 
-  
++ Team Issue:  QA Lead & Mediator
+
+
 Larry Liu - [ROLE]
 - Issues:
 + UI Issue: Saved Job Page
