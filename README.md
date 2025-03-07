@@ -12,7 +12,7 @@ Why This Project: Web application vulnerabilities, particularly client side ones
 
 Team Member List:
 
-Anay Gandhi - [ROLE]
+Anay Gandhi - [Scrum Master & Project Manager]
 - Issues:
   
 Hoa La - [QA Lead & Mediator]
