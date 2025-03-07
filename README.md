@@ -15,8 +15,8 @@ Team Member List:
 Anay Gandhi - [ROLE]
 - Issues:
   
-Hoa La - [ROLE]
-- Issues:
+Hoa La - [QA Lead & Mediator]
+- Issues: 
   
 Larry Liu - [ROLE]
 - Issues:
