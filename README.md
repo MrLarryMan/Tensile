@@ -17,6 +17,8 @@ Anay Gandhi - [ROLE]
   
 Hoa La - [QA Lead & Mediator]
 - Issues: 
++ UI Issue: Login page 
++ Data Issue: Account Data type 
   
 Larry Liu - [ROLE]
 - Issues:
