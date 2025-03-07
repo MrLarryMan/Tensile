@@ -19,6 +19,7 @@ Description: Junior computer science major with moderate background in web dev t
 Issues:
 + UI Issue: Job Specification Page
 + Data Issue: Job_Results Data Type
++ Team Issue: Scrum Master + Project Manager
   
 Hoa La - [QA Lead & Mediator]
 - Issues: 
