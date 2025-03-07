@@ -33,7 +33,7 @@ Larry Liu - [ROLE]
 + Data Issue: Vulnerability Object Type
 + Team Issue: Cybersecurity Architect & Timekeeper
   
-Mason Lemberger - [Systems Architect & Notetaker]
+Mason Lemberger - "Systems Architect & Notetaker"
 - Issues:
 + UI Issue: Analytics and History Page
 + Data Issue: Job Type
