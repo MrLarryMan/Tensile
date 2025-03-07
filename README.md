@@ -7,6 +7,7 @@ Key Features: The application, at its simplest level, would function through bei
 Why This Project: Web application vulnerabilities, particularly client side ones, often affect not only the web application’s provider but also the users. Many smaller web application providers also do not have the resources to contract audits of their applications. Because of this, the potential damage from and attack surface for web application vulnerabilities is extremely high. An automated scanner would hopefully be able to remediate at least the vulnerabilities that automated malicious vulnerability scanners check for.
 
 Team Member List:
+
 Anay Gandhi - [ROLE]
 - Issues:
   
