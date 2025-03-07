@@ -14,8 +14,6 @@ Team Member List:
 
 Anay Gandhi - "Scrum Master & Project Manager"
 
-Description: Junior computer science major with moderate background in web dev through different hackathons and personal projects – and a passion for finance.
-
 Issues:
 + UI Issue: Job Specification Page
 + Data Issue: Job_Results Data Type
