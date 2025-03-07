@@ -27,7 +27,8 @@ Hoa La - [QA Lead & Mediator]
 Larry Liu - [ROLE]
 - Issues:
 + UI Issue: Saved Job Page
-+ Data Issue: Vulnerability Object Type 
++ Data Issue: Vulnerability Object Type
++ Team Issue: Cybersecurity Architect & Timekeeper
   
 Mason Lemberger - [ROLE]
 - Issues:
