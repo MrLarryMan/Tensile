@@ -34,7 +34,7 @@ Larry Liu - [ROLE]
 + Team Issue: Cybersecurity Architect & Timekeeper
   
 Mason Lemberger - "Systems Architect & Notetaker"
-- Issues:
+Issues:
 + UI Issue: Analytics and History Page
 + Data Issue: Job Type
 + Team Issue: Systems Architect & Notetaker
