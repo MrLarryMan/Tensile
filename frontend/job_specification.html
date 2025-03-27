@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Specification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="#">Job Specification</a>
+            <a href="#">Saved Jobs</a>
+            <a href="#">Analytics & History</a>
+        </div>
+        <div class="account-section">
+            <button class="account-btn">
+                <i class="fa-solid fa-user-circle"></i>
+                Account
+            </button>
+        </div>        
+    </div>
+
+    <div class="job-spec-container">
+        <h2>Job Specification</h2>
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" placeholder="e.g., https://api.example.com/data" required />
+        
+        <label for="endpoint">Endpoint:</label>
+        <input type="text" id="endpoint" name="endpoint" placeholder="e.g., /v1/products" required />        
+
+        <label for="datatype">Endpoint Data Type:</label>
+        <select id="datatype" name="datatype">
+            <option value="json">JSON</option>
+            <option value="raw">Raw</option>
+        </select>
+
+        <fieldset>
+            <legend>Select Tests:</legend>
+            <label><input type="checkbox" name="test1" /> Test 1</label>
+            <label><input type="checkbox" name="test2" /> Test 2</label>
+            <label><input type="checkbox" name="test3" /> Test 3</label>
+            <label><input type="checkbox" name="test4" /> Test 4</label>
+        </fieldset>
+
+        <button type="submit">Save</button>
+    </div>
+</body>
+</html>
