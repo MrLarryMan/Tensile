@@ -24,17 +24,24 @@
 
     <div class="job-spec-container">
         <h2>Job Specification</h2>
-        <label for="url">URL:</label>
-        <input type="text" id="url" name="url" placeholder="e.g., https://api.example.com/data" required />
-        
-        <label for="endpoint">Endpoint:</label>
-        <input type="text" id="endpoint" name="endpoint" placeholder="e.g., /v1/products" required />        
 
-        <label for="datatype">Endpoint Data Type:</label>
-        <select id="datatype" name="datatype">
-            <option value="json">JSON</option>
-            <option value="raw">Raw</option>
-        </select>
+        <div class="input-group">
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url" placeholder="e.g., https://api.example.com/data" required />
+        </div>
+
+        <div class="input-group">
+            <label for="endpoint">Endpoint:</label>
+            <input type="text" id="endpoint" name="endpoint" placeholder="e.g., /v1/products" required />
+        </div>
+
+        <div class="input-group">
+            <label for="datatype">Endpoint Data Type:</label>
+            <select id="datatype" name="datatype">
+                <option value="json">JSON</option>
+                <option value="raw">Raw</option>
+            </select>
+        </div>
 
         <fieldset>
             <legend>Select Tests:</legend>
@@ -44,7 +51,13 @@
             <label><input type="checkbox" name="test4" /> Test 4</label>
         </fieldset>
 
-        <button type="submit">Save</button>
+        <div class="button-group">
+            <button type="button" id="run-btn">Enter</button>
+            <button type="button" id="clear-btn">Clear</button>
+            <button type="submit" id="save-btn">Save</button>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
