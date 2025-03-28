@@ -15,7 +15,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
-    width: 80%;
+    width: 90%;
     max-width: 600px;
     height: 30vh;
 }
@@ -31,9 +31,14 @@
     width: 90%;
     max-width: 100%;
     height: 40vh;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
 .history-info img {
+    width: 25vw;
     max-width: 100%; 
     height: auto; 
     border-radius: 5px; 
