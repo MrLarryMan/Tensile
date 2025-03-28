@@ -27,7 +27,7 @@ Issues:
 + Team Issue:  QA Lead & Mediator
 
 
-Larry Liu - [ROLE]
+Larry Liu - Cybersecurity Architect & Timekeeper
 - Issues:
 + UI Issue: Saved Job Page
 + Data Issue: Vulnerability Object Type

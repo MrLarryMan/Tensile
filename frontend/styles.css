@@ -46,7 +46,6 @@ body {
     font-weight: bold;
     transition: 0.3s;
     white-space: nowrap;
-
 }
 
 input::placeholder {
@@ -141,8 +140,6 @@ fieldset input[type="checkbox"] {
     margin-left: auto; 
 }
 
-
-
 .job-spec-container input[type="text"], 
 .job-spec-container select, 
 fieldset label {
@@ -170,4 +167,48 @@ fieldset label {
 
 fieldset input[type="checkbox"] {
     margin-left: 0;
+}
+=======
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    margin-top: 15px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#run-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+#run-btn:hover {
+    background-color: #218838;
+}
+
+#clear-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#clear-btn:hover {
+    background-color: #c82333;
+}
+
+#save-btn {
+    background-color: #0077cc;
+    color: white;
+}
+
+#save-btn:hover {
+    background-color: #005fa3;
 }
