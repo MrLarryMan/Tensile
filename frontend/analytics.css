@@ -1,0 +1,42 @@
+.analytics-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.analytics-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 80%;
+    max-width: 600px;
+    height: 30vh;
+}
+
+.analytics-info label {
+    font-weight: bold;
+}
+
+.history-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 100%;
+    height: 40vh;
+}
+
+.history-info img {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 5px; 
+    border: 1px solid rgba(0, 0, 0, 0.5);  
+    display: block;
+}

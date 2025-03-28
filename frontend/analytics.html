@@ -24,7 +24,24 @@
 
     <div class = "analytics-container">
         <h1>Analytics and History</h1>
-        <label></label>       
+        <h2>Analytics</h2>
+        <div class = "analytics-info">
+            <label for = "passed-info">Passed Scripts: </label>
+            <p id = "passed-info">4 out of 5 scripts passed</p>
+            <label for = "recommendation-info">Recommendations: </label>
+            <p id = "recommendation-info">You should consider limiting the types of inputs your website recieves.</p>
+        </div>   
+        <h2>History</h2>   
+        <div class = "history-info">
+            <img id = "graph-history" src = "imgs/graphPhysics.png"></img>
+            <label for = "failed-tests">Failed Tests</label>
+            <select id = "failed-tests">
+                <option value = "Test 1">Test 1</option>
+                <option value = "Test 2">Test 2</option>
+                <option value = "Test 3">Test 3</option>
+            </select>
+            <input type=button id="view-failed-test" value = "Details">
     </div>
+    
 </body>
 </html>
