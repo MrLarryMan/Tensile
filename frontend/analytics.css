@@ -20,7 +20,7 @@
     height: 30vh;
 }
 
-.analytics-info label {
+.analytics-container label {
     font-weight: bold;
 }
 
@@ -37,6 +37,15 @@
     background-color: #f9f9f9;
 }
 
+.graph-container {
+    flex: 1;
+}
+
+.failed-tests-container {
+    flex: 2;
+    align-items: center;
+}
+
 .history-info img {
     width: 25vw;
     max-width: 100%; 
@@ -44,4 +53,10 @@
     border-radius: 5px; 
     border: 1px solid rgba(0, 0, 0, 0.5);  
     display: block;
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
