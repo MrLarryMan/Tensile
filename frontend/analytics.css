@@ -1,0 +1,117 @@
+.analytics-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.analytics-container select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 25%;
+    height: 100%;
+    max-height: 50px;
+    text-align: center;
+    font-size: calc(var(--container-width));
+    appearance: none;
+}
+
+
+.analytics-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 600px;
+    height: 30vh;
+}
+
+
+
+.analytics-container label {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+}
+
+.history-info {
+    flex: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 90%;
+    max-width: 100%;
+    height: 40vh;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 5px;
+}
+
+.graph-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;;
+    align-items: center;
+}
+
+.failed-tests-container {
+    flex: 1;
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.failed-tests-selection {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: 50px;
+    width: 100%;
+}
+
+.failed-tests-container p {
+    flex: 3;
+    padding: 5px;
+    background-color: #f0f2f5;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    width: 90%;
+    text-align: center;
+}
+
+.history-info img {
+    width: 25vw;
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 5px; 
+    border: 1px solid rgba(0, 0, 0, 0.5);  
+    display: block;
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#graph-label {
+    margin-bottom: 10px;
+}
+
+#failed-tests {
+    margin-left: 5px;
+}

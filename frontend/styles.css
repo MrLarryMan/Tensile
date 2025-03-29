@@ -70,7 +70,7 @@ input::placeholder {
     cursor: pointer;
     border-radius: 5px;
     transition: 0.3s;
-    margin-right: 40px;
+    margin-right:40px;
 }
 
 .account-btn:hover {
@@ -148,6 +148,27 @@ fieldset label {
     width: 100%; 
 }
 
+.job-spec-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.job-spec-container button:hover {
+    background-color: #005fa3;
+}
+
+fieldset input[type="checkbox"] {
+    margin-left: 0;
+}
+=======
 .button-group {
     display: flex;
     justify-content: center;
