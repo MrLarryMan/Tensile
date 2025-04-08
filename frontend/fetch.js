@@ -22,7 +22,7 @@ export async function getInitialHistoryData() {
         });
 
         return d;
-        
+
     } catch (error) {
         console.error("There was a problem with the fetch request:", error);
         return { jobs: [], run_at: [], tests: [] }; // Return an empty dataset on error
@@ -31,3 +31,21 @@ export async function getInitialHistoryData() {
 
 
 
+export async function getJobData(jobID) { 
+    const url = "tempStorage/job_results.json"; // Fixed path
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const jobData = data.find(jobResult => jobResult["id"] === jobID);
+        return jobData;
+    } catch (error) {   
+        console.error("There was a problem with the fetch request:", error);
+        return null; // Return null on error
+    }
+}
