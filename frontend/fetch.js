@@ -22,6 +22,7 @@ export async function getInitialHistoryData() {
         });
 
         return d;
+        
     } catch (error) {
         console.error("There was a problem with the fetch request:", error);
         return { jobs: [], run_at: [], tests: [] }; // Return an empty dataset on error
