@@ -11,3 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
         // actual logic yet to be implemented
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("loggedInUser");
+    if (username) {
+      const accountBtn = document.querySelector(".account-btn");
+      if (accountBtn) {
+        accountBtn.innerHTML = `
+          <i class="fa-solid fa-user-circle"></i>
+          ${username}
+        `;
+      }
+    }
+  });
