@@ -6,6 +6,8 @@
     <title>Analytics & History</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="analytics.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="module" src="analytics.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -26,8 +28,6 @@
         <h1>Analytics and History</h1>
         <select id = "Past Jobs">
             <option value = "Job 1">Job 1</option>
-            <option value = "Job 2">Job 2</option>
-            <option value = "Job 3">Job 3</option>
          </select>
         <h2>Analytics</h2>
         <div class = "analytics-info">
@@ -40,15 +40,13 @@
         <div class = "history-info">
             <div class = "graph-container">
                 <label for = "graph-history" id = "graph-label">Graph of Past Jobs</label>
-                <img id = "graph-history" src = "imgs/graphPhysics.png"></img> <!-- Will become a canvas -->
+                <canvas id="graph-history"></canvas> <!-- Will become a canvas -->
             </div>
             <div class = "failed-tests-container">
                 <div class = "failed-tests-selection">
                     <label for = "failed-tests">Failed Tests: </label>
                     <select id = "failed-tests">
                         <option value = "Test 1">Test 1</option>
-                        <option value = "Test 2">Test 2</option>
-                        <option value = "Test 3">Test 3</option>
                     </select>
                 </div>
                 <p class = "failed-test-info">This test injected a malicous script into your frontend</p>
