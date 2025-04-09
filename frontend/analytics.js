@@ -23,7 +23,7 @@ addEventListener("DOMContentLoaded", async () => {
             replaceVulnObjects(jobInfo);
         }
     });
-    
+
 }); 
 
 
@@ -55,7 +55,7 @@ async function updateFailedTestInfo(test_id) {
         } else {
             console.warn("vulnInfo not found for test_id:", test_id);
         }
-   } catch(error) {
+    } catch(error) {
         console.error(`Error fetching failed test info: ${error}`)
     }
 }
