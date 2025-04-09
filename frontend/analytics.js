@@ -1,6 +1,7 @@
 import { getInitialHistoryData, getJobData } from "./fetch.js"
 
 addEventListener("DOMContentLoaded", async () => {
+
     try {
         const data = await getInitialHistoryData();
         if (data.jobIDs.length > 0) {
@@ -9,6 +10,7 @@ addEventListener("DOMContentLoaded", async () => {
     } catch(error) {
         console.error(`Error fetching data: ${error}`)
     }
+
     const failedTestsSelections = document.getElementById("failed-tests");
     failedTestsSelections.addEventListener("change", async () => {
         updateFailedTestInfo(parseInt(failedTestsSelections.value));
@@ -21,6 +23,7 @@ addEventListener("DOMContentLoaded", async () => {
             replaceVulnObjects(jobInfo);
         }
     });
+    
 }); 
 
 
