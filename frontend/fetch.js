@@ -44,6 +44,7 @@ export async function getJobData(jobID) {
 
         const jobData = data.find(jobResult => jobResult["id"] === jobID);
         return jobData;
+        
     } catch (error) {   
         console.error("There was a problem with the fetch request:", error);
         return null; // Return null on error

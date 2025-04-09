@@ -9,14 +9,17 @@
             "Test 5": true
         },
         "vulns": [{
+            "test_id": 1,
             "category": "XSS",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
         }, {
+            "test_id": 2,
             "category": "XSS",
             "payload": "payload 2",
             "recommendations": "recommendations 2" 
         }, {
+            "test_id": 3,
             "category": "Directory Traversal",
             "payload": "payload 3",
             "recommendations": "recommendations 3"
@@ -43,14 +46,17 @@
             "Test 5": false
         },
         "vulns": [{
+            "test_id": 1,
             "category": "Directory Traversal",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
         }, {
+            "test_id": 2,
             "category": "Directory Traversal",
             "payload": "payload 2",
             "recommendations": "recommendations 2" 
         }, {
+            "test_id": 3,
             "category": "XSS",
             "payload": "payload 3",
             "recommendations": "recommendations 3"
@@ -77,14 +83,17 @@
             "Test 5": false
         },
         "vulns": [{
+            "test_id": 1,
             "category": "Not XSS",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
         }, {
+            "test_id": 2,
             "category": "Not XSS",
             "payload": "payload 2",
             "recommendations": "recommendations 2" 
         }, {
+            "test_id": 3,
             "category": "Not Directory Traversal",
             "payload": "payload 3",
             "recommendations": "recommendations 3"
@@ -111,14 +120,17 @@
             "Test 5": true
         },
         "vulns": [{
+            "test_id": 1,
             "category": "Not Directory Traversal",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
         }, {
+            "test_id": 2,
             "category": "Not Directory Traversal",
             "payload": "payload 2",
             "recommendations": "recommendations 2" 
         }, {
+            "test_id": 3,
             "category": "Not XSS",
             "payload": "payload 3",
             "recommendations": "recommendations 3"
@@ -145,14 +157,17 @@
             "Test 5": false
         },
         "vulns": [{
+            "test_id": 1,
             "category": "XSS",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
         }, {
+            "test_id": 2,
             "category": "XSS",
             "payload": "payload 2",
             "recommendations": "recommendations 2" 
         }, {
+            "test_id": 3,
             "category": "Directory Traversal",
             "payload": "payload 3",
             "recommendations": "recommendations 3"
