@@ -9,20 +9,21 @@ addEventListener("DOMContentLoaded", async () => {
     } catch(error) {
         console.error(`Error fetching data: ${error}`)
     }
+    const failedTestsSelections = document.getElementById("failed-tests");
+    failedTestsSelections.addEventListener("change", async () => {
+        updateFailedTestInfo(parseInt(failedTestsSelections.value));
+    });
+
+    const jobSelection = document.getElementById("Past Jobs");
+    jobSelection.addEventListener("change", async () => {
+        const jobInfo = await getJobData(parseInt(jobSelection.value));
+        if (jobInfo) {
+            replaceVulnObjects(jobInfo);
+        }
+    });
 }); 
 
-const failedTestsSelections = document.getElementById("failed-tests");
-failedTestsSelections.addEventListener("change", async () => {
-    updateFailedTestInfo(parseInt(failedTestsSelections.value));
-});
 
-const jobSelection = document.getElementById("Past Jobs");
-jobSelection.addEventListener("change", async () => {
-    const jobInfo = await getJobData(parseInt(jobSelection.value));
-    if (jobInfo) {
-        replaceVulnObjects(jobInfo);
-    }
-});
 
 
 
