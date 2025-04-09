@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     request.onsuccess = function (event) {
         db = event.target.result;
-        console.log("IndexedDB initialized successfully.");
+        console.log("Success");
     };
 
     request.onerror = function (event) {
-        console.error("Error initializing IndexedDB:", event.target.error);
+        console.error("Error with IndexDB:", event.target.error);
     };
 
     // Save job details to IndexedDB
@@ -37,12 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const request = store.add(jobDetails);
 
         request.onsuccess = function () {
-            alert("Job details saved successfully to IndexedDB!");
+            alert("Success saving to IndexDB");
         };
 
         request.onerror = function (event) {
-            console.error("Error saving to IndexedDB:", event.target.error);
-            alert("Failed to save job details to IndexedDB.");
+            console.error("Error Saving:", event.target.error);
+            alert("Failed");
         };
     }
 
@@ -53,13 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const request = store.getAll();
 
         request.onsuccess = function () {
-            console.log("Retrieved jobs from IndexedDB:", request.result);
-            alert("Jobs retrieved successfully. Check the console for details.");
+            console.log("Jobs Retrieved:", request.result);
+            alert("Success");
         };
 
         request.onerror = function (event) {
-            console.error("Error retrieving jobs from IndexedDB:", event.target.error);
-            alert("Failed to retrieve jobs from IndexedDB.");
+            console.error("Error Retrieving Jobs", event.target.error);
+            alert("Failure");
         };
     }
 
