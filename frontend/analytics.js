@@ -29,6 +29,7 @@ addEventListener("DOMContentLoaded", async () => {
 
 
 function replaceVulnObjects(jobInfo) {
+    if (!jobInfo || !jobInfo["vulns"]) return;
     const failedTestsSelections = document.getElementById("failed-tests");
     const vulnList = jobInfo["vulns"] || [];
     failedTestsSelections.replaceChildren(); // Clear existing options
