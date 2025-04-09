@@ -12,20 +12,22 @@ export async function getInitialHistoryData() {
         const d = {
             jobIDs: [],
             run_at: [],
-            tests: []
+            tests: [],
+            jobNames: [],
         };
 
         data.forEach(jobResult => {
             d.jobIDs.push(jobResult["id"]); // Fixed object access
             d.run_at.push(jobResult["run_at"]);
             d.tests.push(jobResult["tests"]);
+            d.jobNames.push(jobResult["job"]["job_name"]);
         });
 
         return d;
 
     } catch (error) {
         console.error("There was a problem with the fetch request:", error);
-        return { jobs: [], run_at: [], tests: [] }; // Return an empty dataset on error
+        return { jobs: [], run_at: [], tests: [], jobNames: [] }; // Return an empty dataset on error
     }
 }
 

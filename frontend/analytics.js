@@ -3,22 +3,25 @@ import { getInitialHistoryData, getJobData } from "./fetch.js"
 addEventListener("DOMContentLoaded", async () => {
     try {
         const data = await getInitialHistoryData();
-    } catch(error) {
-        console.error(`Error fetching data: ${error}`)
-    }
-    try {
-        const jobInfo = await getJobData(1);
-        if (jobInfo) {
-            replaceVulnObjects(jobInfo);
+        if (data.jobIDs.length > 0) {
+            updateJobInfoSelection(data.jobIDs, data.jobNames);
         }
     } catch(error) {
-        console.error(`Error fetching job data: ${error}`)
+        console.error(`Error fetching data: ${error}`)
     }
 }); 
 
 const failedTestsSelections = document.getElementById("failed-tests");
 failedTestsSelections.addEventListener("change", async () => {
     updateFailedTestInfo(parseInt(failedTestsSelections.value));
+});
+
+const jobSelection = document.getElementById("Past Jobs");
+jobSelection.addEventListener("change", async () => {
+    const jobInfo = await getJobData(parseInt(jobSelection.value));
+    if (jobInfo) {
+        replaceVulnObjects(jobInfo);
+    }
 });
 
 
@@ -50,4 +53,18 @@ async function updateFailedTestInfo(test_id) {
    } catch(error) {
         console.error(`Error fetching failed test info: ${error}`)
     }
+}
+
+async function updateJobInfoSelection(job_ids, jobNames) {
+    if(job_ids.length !== jobNames.length) return;
+    const jobSelection = document.getElementById("Past Jobs");
+    jobSelection.replaceChildren(); // Clear existing options
+    for(let i = 0; i < job_ids.length; i++) {
+        const option = document.createElement("option");
+        option.value = job_ids[i];
+        option.textContent = jobNames[i];
+        jobSelection.appendChild(option);
+    }
+    const jobInfo = getJobData(job_ids[0]); // Update info for the first option
+    replaceVulnObjects(await jobInfo);
 }
