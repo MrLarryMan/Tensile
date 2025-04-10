@@ -70,7 +70,7 @@ input::placeholder {
     cursor: pointer;
     border-radius: 5px;
     transition: 0.3s;
-    margin-right: 40px;
+    margin-right:40px;
 }
 
 .account-btn:hover {
@@ -115,6 +115,16 @@ input::placeholder {
     font-size: 16px;
 }
 
+.saved-job-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgb(255, 255, 255);
+    text-align: center;
+    width: 400px;
+    margin-top: 100px;
+}
+
 fieldset {
     border: none;
     text-align: left;
@@ -146,6 +156,27 @@ fieldset label {
     display: flex;
     align-items: center;
     width: 100%; 
+}
+
+.job-spec-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.job-spec-container button:hover {
+    background-color: #005fa3;
+}
+
+fieldset input[type="checkbox"] {
+    margin-left: 0;
 }
 
 .button-group {
@@ -183,6 +214,15 @@ fieldset label {
     background-color: #c82333;
 }
 
+#delete-btn {
+background-color: #dc3545;
+color: white;
+}
+
+#delete-btn:hover {
+background-color: #c82333;
+}
+
 #save-btn {
     background-color: #0077cc;
     color: white;
@@ -190,4 +230,13 @@ fieldset label {
 
 #save-btn:hover {
     background-color: #005fa3;
+}
+
+#edit-btn {
+background-color: #0077cc;
+color: white;
+}
+
+#edit-btn:hover {
+background-color: #005fa3;
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saved Jobs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -18,7 +19,36 @@
                 <i class="fa-solid fa-user-circle"></i>
                 Account
             </button>
-        </div>        
+        </div>
     </div>
+
+    <div class="saved-job-container">
+        <h2>Saved Jobs</h2>
+
+        <label for="jobselect">Select a Job:</label>
+
+        <select name="jobselect" id="jobselect">
+            <option value=""></option>  <!-- Blank option -->
+            <option value="test">test</option>
+            <option value="test2">test2</option>
+        </select>
+        <div class="text-box" id="details-box">
+            <h3 id="job-name"></h3>
+            <p><strong>URL:</strong> <span id="url"></span></p>
+            <p><strong>Endpoint:</strong> <span id="endpoint"></span></p>
+            <p><strong>Test Options:</strong> <span id="test-options"></span></p>
+            <p><strong>Datatype:</strong> <span id="datatype"></span></p>
+        </div>
+
+        <div class="button-group">
+            <button type="button" id="run-btn">Run</button>
+            <button type="button" id="edit-btn">Edit</button>
+            <button type="button" id="delete-btn">Delete</button>
+        </div>
+    </div>
+
+    <script src="saved_jobs.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
