@@ -26,13 +26,13 @@ async function updatePage() {
         const data = await getInitialHistoryData();
         if (data && data["jobIDs"].length > 0) {
             //updateHistoryGraph(data);
-            updateJobSelectionInfo(data["jobIDs"], data["jobNames"]);
+            updateJobSelectionInfo(data["jobIDs"], data["jobNames"]); //set job selection options
         }
     } catch(error) {
         console.error(`Error updating page: ${error}`);
     }
     try {
-        const jobInfo = await getJobData(1);
+        const jobInfo = await getJobData(1); //set initial values for page
         refreshJobInfo(jobInfo);
     } catch (error) {
         console.error(`Error fetching initial job info: ${error}`);
