@@ -2,14 +2,7 @@ import { getInitialHistoryData, getJobData } from "./fetch.js"
 
 addEventListener("DOMContentLoaded", async () => {
 
-    try {
-        const data = await getInitialHistoryData();
-        if (data.jobIDs.length > 0) {
-            updateJobInfoSelection(data.jobIDs, data.jobNames);
-        }
-    } catch(error) {
-        console.error(`Error fetching data: ${error}`)
-    }
+    updatePage();
 
     const failedTestsSelections = document.getElementById("failed-tests");
     failedTestsSelections.addEventListener("change", async () => {
@@ -20,7 +13,7 @@ addEventListener("DOMContentLoaded", async () => {
     jobSelection.addEventListener("change", async () => {
         const jobInfo = await getJobData(parseInt(jobSelection.value));
         if (jobInfo) {
-            replaceVulnObjects(jobInfo);
+            refreshJobInfo(jobInfo);
         }
     });
 
@@ -28,10 +21,46 @@ addEventListener("DOMContentLoaded", async () => {
 
 
 
+async function updatePage() {
+    try {
+        const data = await getInitialHistoryData();
+        if (data && data["jobIDs"].length > 0) {
+            //updateHistoryGraph(data);
+            updateJobSelectionInfo(data["jobIDs"], data["jobNames"]);
+        }
+    } catch(error) {
+        console.error(`Error updating page: ${error}`);
+    }
+    try {
+        const jobInfo = await getJobData(1);
+        refreshJobInfo(jobInfo);
+    } catch (error) {
+        console.error(`Error fetching initial job info: ${error}`);
+    }
+}
 
+async function updateHistoryGraph(data) {
+    return;
+}
 
+async function updateJobSelectionInfo(job_ids, jobNames) {
+    if(job_ids.length !== jobNames.length) return;
+    const jobSelection = document.getElementById("Past Jobs");
+    jobSelection.replaceChildren(); // Clear existing options
+    for(let i = 0; i < job_ids.length; i++) {
+        const option = document.createElement("option");
+        option.value = job_ids[i];
+        option.textContent = jobNames[i];
+        jobSelection.appendChild(option);
+    }
+}
 
-function replaceVulnObjects(jobInfo) {
+ function refreshJobInfo(jobInfo) {
+    updateFailedTestSelectionOptions(jobInfo);
+    updateJobSummaryInfo(jobInfo);
+}
+
+function updateFailedTestSelectionOptions(jobInfo) {
     if (!jobInfo || !jobInfo["vulns"]) return;
     const failedTestsSelections = document.getElementById("failed-tests");
     const vulnList = jobInfo["vulns"] || [];
@@ -60,16 +89,13 @@ async function updateFailedTestInfo(test_id) {
     }
 }
 
-async function updateJobInfoSelection(job_ids, jobNames) {
-    if(job_ids.length !== jobNames.length) return;
-    const jobSelection = document.getElementById("Past Jobs");
-    jobSelection.replaceChildren(); // Clear existing options
-    for(let i = 0; i < job_ids.length; i++) {
-        const option = document.createElement("option");
-        option.value = job_ids[i];
-        option.textContent = jobNames[i];
-        jobSelection.appendChild(option);
-    }
-    const jobInfo = getJobData(job_ids[0]); // Update info for the first option
-    replaceVulnObjects(await jobInfo);
+async function updateJobSummaryInfo(jobData) {
+    const testResults = Object.values(jobData["tests"]) || {};
+    if (testResults.length === 0) return;
+    const passed_tests = testResults.reduce((acc, test) => acc + (test ? 1 : 0), 0);
+    const job_summary = document.getElementById("passed-info");
+    job_summary.innerHTML = ` ${passed_tests} out of ${testResults.length} tests passed`;
 }
+
+
+
