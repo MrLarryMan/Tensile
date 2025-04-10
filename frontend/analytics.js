@@ -10,11 +10,8 @@ addEventListener("DOMContentLoaded", async () => {
     });
 
     const jobSelection = document.getElementById("Past Jobs");
-    jobSelection.addEventListener("change", async () => {
-        const jobInfo = await getJobData(parseInt(jobSelection.value));
-        if (jobInfo) {
-            refreshJobInfo(jobInfo);
-        }
+    jobSelection.addEventListener("change", async () => {  
+        refreshJobInfo(parseInt(jobSelection.value)); 
     });
 
 }); 
@@ -27,15 +24,10 @@ async function updatePage() {
         if (data && data["jobIDs"].length > 0) {
             //updateHistoryGraph(data);
             updateJobSelectionInfo(data["jobIDs"], data["jobNames"]); //set job selection options
+            refreshJobInfo(data["jobIDs"][0]); // Load initial job info
         }
     } catch(error) {
         console.error(`Error updating page: ${error}`);
-    }
-    try {
-        const jobInfo = await getJobData(1); //set initial values for page
-        refreshJobInfo(jobInfo);
-    } catch (error) {
-        console.error(`Error fetching initial job info: ${error}`);
     }
 }
 
@@ -55,7 +47,10 @@ async function updateJobSelectionInfo(job_ids, jobNames) {
     }
 }
 
- function refreshJobInfo(jobInfo) {
+ async function refreshJobInfo(jobID) {
+    const jobInfo = await getJobData(jobID);
+    if (!jobInfo) return;
+    sessionStorage.setItem(`jobInfo_${jobID}`, JSON.stringify(jobInfo));
     updateFailedTestSelectionOptions(jobInfo);
     updateJobSummaryInfo(jobInfo);
 }
@@ -71,12 +66,23 @@ function updateFailedTestSelectionOptions(jobInfo) {
         option.textContent = `${vuln["category"]}: ${vuln["payload"]}`;
         failedTestsSelections.appendChild(option);
     }
-    updateFailedTestInfo(vulnList[0]["test_id"]); // Update info for the first option
+    if(vulnList.length > 0) {
+        updateFailedTestInfo(vulnList[0]["test_id"]); // Update info for the first option
+    }
+    
 }
 
 async function updateFailedTestInfo(test_id) {
     try{
-        const jobInfo = await getJobData(test_id);
+        const job_id = parseInt(document.getElementById("Past Jobs").value);
+        let jobInfo = sessionStorage.getItem(`jobInfo_${job_id}`);
+
+        if (!jobInfo) {
+            jobInfo = await getJobData(job_id);
+            sessionStorage.setItem(`jobInfo_${job_id}`, JSON.stringify(jobInfo));
+        } else {
+            jobInfo = JSON.parse(jobInfo);
+        }
         const vulnList = jobInfo["vulns"] || [];
         const vulnInfo = vulnList.find(v => v["test_id"] === test_id);
         if (vulnInfo) {
