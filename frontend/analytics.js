@@ -22,7 +22,7 @@ async function updatePage() {
     try {
         const data = await getInitialHistoryData();
         if (data && data["jobIDs"].length > 0) {
-            //updateHistoryGraph(data);
+            buildHistoryGraph(data["run_at"], data["tests"]);
             updateJobSelectionInfo(data["jobIDs"], data["jobNames"]); //set job selection options
             refreshJobInfo(data["jobIDs"][0]); // Load initial job info
         }
@@ -31,8 +31,62 @@ async function updatePage() {
     }
 }
 
-async function updateHistoryGraph(data) {
-    return;
+function buildHistoryGraph(run_ats, tests) {
+    const graph = document.getElementById("graph-history").getContext("2d");
+    if (!graph) {
+        console.error("Graph context not found");
+        return;
+    }
+    const x_values = run_ats.map(run_at => new Date(run_at).toLocaleDateString());
+    const y_values = tests.map(test => Object.values(test).reduce((acc, val) => acc + (val ? 1 : 0), 0));
+    const data = {
+        labels: x_values,
+        datasets: [{
+            label: 'Number of Tests Passed',
+            data: y_values,
+            backgroundColor: 'rgba(0, 119, 204, 0.2)',
+            borderColor: 'rgba(0, 119, 204, 1)',
+            borderWidth: 2,
+            tension: 0.3
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Run Date'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Tests Passed'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    };
+
+    new Chart(graph, config);
 }
 
 async function updateJobSelectionInfo(job_ids, jobNames) {
