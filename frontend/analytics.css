@@ -25,6 +25,11 @@
     border: 2px solid #005fa3;
 }
 
+.analytics-container select:hover {
+    background-color: rgba(189, 185, 185, 0.2);
+    cursor: pointer;
+}
+
 .analytics-info {
     flex: 2;
     display: flex;
