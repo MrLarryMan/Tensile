@@ -35,7 +35,7 @@ function buildHistoryGraph(run_ats, tests) {
         console.error("Graph context not found");
         return;
     }
-    const x_values = run_ats.map(run_at => new Date(run_at).toLocaleDateString());
+    const x_values = run_ats.map(run_at => new Date(run_at).toISOString());
     const y_values = tests.map(test => Object.values(test).reduce((acc, val) => acc + (val ? 1 : 0), 0));
     const data = {
         labels: x_values,
@@ -55,23 +55,25 @@ function buildHistoryGraph(run_ats, tests) {
         options: {
             responsive: true,
             scales: {
-                x: {
+                xAxes: [{
                     type: 'time',
                     time: {
                         unit: 'day'
                     },
-                    title: {
+                    scaleLabel: {
                         display: true,
-                        text: 'Run Date'
+                        labelString: 'Run Date'
                     }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                    scaleLabel: {
                         display: true,
-                        text: 'Tests Passed'
+                        labelString: 'Tests Passed'
                     }
-                }
+                }]
             },
             plugins: {
                 legend: {
