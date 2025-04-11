@@ -117,3 +117,18 @@
 #failed-tests {
     margin-left: 5px;
 }
+
+.blue {
+    background-color: #0077cc !important;
+    color: white !important;
+}
+
+.green {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.red {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
