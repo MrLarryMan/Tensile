@@ -155,6 +155,9 @@ async function updateJobSummaryInfo(jobData) {
     const passed_tests = testResults.reduce((acc, test) => acc + (test ? 1 : 0), 0);
     const job_summary = document.getElementById("passed-info");
     job_summary.innerHTML = ` ${passed_tests} out of ${testResults.length} tests passed`;
+
+    const job_information = document.getElementById("job-information");
+    job_information.innerHTML = `<strong>${jobData["job"]["job_name"]}</strong> | Ran on: ${new Date(jobData["run_at"]).toLocaleDateString()} found ${jobData["vulns"].length} vulnerabilities.`;
 }
 
 
