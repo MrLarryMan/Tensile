@@ -16,8 +16,6 @@ addEventListener("DOMContentLoaded", async () => {
 
 }); 
 
-
-
 async function updatePage() {
     try {
         const data = await getInitialHistoryData();
@@ -159,6 +157,5 @@ async function updateJobSummaryInfo(jobData) {
     const job_information = document.getElementById("job-information");
     job_information.innerHTML = `<strong>${jobData["job"]["job_name"]}</strong> | Ran on: ${new Date(jobData["run_at"]).toLocaleDateString()} found ${jobData["vulns"].length} vulnerabilities.`;
 }
-
 
 
