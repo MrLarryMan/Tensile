@@ -1,5 +1,5 @@
 export async function getInitialHistoryData() {
-    const url = "tempStorage/job_results.json"; // Fixed path
+    const url = "data/job_results.json"; // Fixed path
 
     try {
         const response = await fetch(url);
@@ -34,7 +34,7 @@ export async function getInitialHistoryData() {
 
 
 export async function getJobData(jobID) { 
-    const url = "tempStorage/job_results.json"; // Fixed path
+    const url = "data/job_results.json"; // Fixed path
 
     try {
         const response = await fetch(url);
