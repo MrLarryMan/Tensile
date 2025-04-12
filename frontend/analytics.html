@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="analytics.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="module" src="analytics.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -24,35 +27,30 @@
     </div>
 
     <div class = "analytics-container">
-        <h1>Analytics and History</h1>
         <select id = "Past Jobs">
-            <option value = "Job 1">Job 1</option>
-            <option value = "Job 2">Job 2</option>
-            <option value = "Job 3">Job 3</option>
+            <option value = "Job 1">Failed to Find Jobs</option>
          </select>
         <h2>Analytics</h2>
         <div class = "analytics-info">
-            <label for = "passed-info">Passed Scripts: </label>
-            <p id = "passed-info">4 out of 5 scripts passed</p>
-            <label for = "recommendation-info">Recommendations: </label>
-            <p id = "recommendation-info">You should consider limiting the types of inputs your website recieves.</p>
+            <label class = "green" for = "passed-info">Passed Scripts: </label>
+            <p id = "passed-info">No Information Available</p>
+            <label class = "blue" for = "job-information">Job Information: </label>
+            <p id = "job-information">No Information Available.</p>
         </div>   
         <h2>History</h2>   
         <div class = "history-info">
             <div class = "graph-container">
-                <label for = "graph-history" id = "graph-label">Graph of Past Jobs</label>
-                <img id = "graph-history" src = "imgs/graphPhysics.png"></img> <!-- Will become a canvas -->
+                <label class = "blue" for = "graph-history" id = "graph-label">Graph of Past Jobs</label>
+                <canvas id="graph-history"></canvas>
             </div>
             <div class = "failed-tests-container">
                 <div class = "failed-tests-selection">
-                    <label for = "failed-tests">Failed Tests: </label>
+                    <label class = "red" for = "failed-tests">Failed Tests: </label>
                     <select id = "failed-tests">
-                        <option value = "Test 1">Test 1</option>
-                        <option value = "Test 2">Test 2</option>
-                        <option value = "Test 3">Test 3</option>
+                        <option value = "Test 1">No Tests Found</option>
                     </select>
                 </div>
-                <p class = "failed-test-info">This test injected a malicous script into your frontend</p>
+                <p class = "failed-test-info">No Information Available</p>
             </div>
         </div>
     </div>
