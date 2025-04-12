@@ -18,7 +18,7 @@ document.getElementById("enter-btn").addEventListener("click", async () => {
 // Async function to login user: check username and password -- used in login page 
 async function loginUser(inputUsername, inputPassword) {
     try {
-      const response = await fetch('../data/users.json');
+      const response = await fetch('./data/users.json');
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
