@@ -35,6 +35,21 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
+    const confirm_modal = document.getElementById('confirm-delete-modal');
+    const delete_confirmyes_btn = document.getElementById('confirm-modal-yes');
+    const delete_confirmno_btn = document.getElementById('confirm-modal-no');
+
+    delete_confirmyes_btn.addEventListener('click', () => {
+        // TODO: Implement Logic
+        confirm_modal.close();
+    });
+
+    delete_confirmno_btn.addEventListener('click', () => {
+        // TODO: Implement Logic
+        confirm_modal.close();
+    });
+
+
     document.getElementById("run-btn").addEventListener("click", function () {
         alert("Running job");
         // TODO: Implement Logic
@@ -44,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         // TODO: Implement Logic
     });
     document.getElementById("delete-btn").addEventListener("click", function () {
-        alert("Deleting job");
+        confirm_modal.showModal();
         // TODO: Implement Logic
     });
 });
