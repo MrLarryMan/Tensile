@@ -1,10 +1,5 @@
-- form validation: email + password check 
-- indexeddb: save user token somewhere
-
-1. dynamic content change: display username top right 
-
-2. ASYNC Fetch credentials -- to compare password when login 
-
-3. ASYNC Fetch -- to compare username when signup 
-
-
+- features:/saved-jobs
++ GET: what jobs are saved 
++ POST: save a job 
++ PUT: change a job  
++ DELETE: delete a saved job 
