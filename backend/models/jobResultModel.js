@@ -20,10 +20,8 @@ function writeJobResults(jobResults) {
 
 exports.getAll = () => readJobResults();
 
-exports.getById = (id) => {
-    id = id.toString();
-    return readJobResults().find(jobResult => jobResult.id === id);
-}
+exports.getById = (id) => readJobResults().find(jobResult => jobResult.id === id.toString());
+
 
 exports.create = (jobResultData) => {
     const jobResults = readJobResults();

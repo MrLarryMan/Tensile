@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "tests": {
             "Test 1": true,
             "Test 2": false,
@@ -9,7 +9,7 @@
             "Test 5": true
         },
         "vulns": [{
-            "test_id": 1,
+            "test_id": "1",
             "category": "XSS",
             "payload": "payload 1",
             "recommendations": "recommendations 1"
@@ -37,7 +37,7 @@
         }
     },
     {
-        "id": 2,
+        "id": "2",
         "tests": {
             "Test 1": true,
             "Test 2": true,
@@ -74,7 +74,7 @@
         }
     },
     {
-        "id": 3,
+        "id": "3",
         "tests": {
             "Test 1": false,
             "Test 2": false,
@@ -111,7 +111,7 @@
         }
     },
     {
-        "id": 4,
+        "id": "4",
         "tests": {
             "Test 1": true,
             "Test 2": true,
@@ -148,7 +148,7 @@
         }
     },
     {
-        "id": 5,
+        "id": "5",
         "tests": {
             "Test 1": false,
             "Test 2": true,
