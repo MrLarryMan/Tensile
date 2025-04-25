@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://www.website.com",
+    "endpoint": "/upload",
+    "datatype": "json",
+    "selectedTests": [
+      "test3"
+    ],
+    "createdAt": "2025-04-25T01:50:33.200Z",
+    "id": "1745545833201"
+  },
+  {
+    "url": "https://test.com",
+    "endpoint": "/testing",
+    "datatype": "raw",
+    "selectedTests": [
+      "test2",
+      "test4"
+    ],
+    "createdAt": "2025-04-25T01:51:06.347Z",
+    "id": "1745545866350"
+  }
+]
