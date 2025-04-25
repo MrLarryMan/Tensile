@@ -1,8 +1,10 @@
+const ANALYTICS_BASE_URL = 'http://localhost:3000/api/analytics'
+
+
 export async function getInitialHistoryData() {
-    const url = "../data/job_results.json"; // Fixed path
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(ANALYTICS_BASE_URL);
         if (!response.ok) {
             throw new Error(`Response status ${response.status}`);
         }
@@ -34,18 +36,15 @@ export async function getInitialHistoryData() {
 
 
 export async function getJobData(jobID) { 
-    const url = "../data/job_results.json"; // Fixed path
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(`${ANALYTICS_BASE_URL}/${jobID}`);
         if (!response.ok) {
             throw new Error(`Response status ${response.status}`);
         }
 
         const data = await response.json();
-
-        const jobData = data.find(jobResult => jobResult["id"] === jobID);
-        return jobData;
+        return data;
         
     } catch (error) {   
         console.error("There was a problem with the fetch request:", error);
