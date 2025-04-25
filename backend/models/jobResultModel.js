@@ -40,7 +40,7 @@ exports.update = (id, jobResultData) => {
     return jobResults[idx];
 };
 
-exports.delete = (id) => {  
+exports.deleteById = (id) => {  
     const jobResults = readJobResults();
     const idx = jobResults.findIndex(jobResult => jobResult.id === id.toString());
     if (idx === -1) return false;

@@ -1,187 +1,166 @@
 [
-    {
-        "id": "1",
-        "tests": {
-            "Test 1": true,
-            "Test 2": false,
-            "Test 3": false,
-            "Test 4": false,
-            "Test 5": true
-        },
-        "vulns": [{
-            "test_id": "1",
-            "category": "XSS",
-            "payload": "payload 1",
-            "recommendations": "recommendations 1"
-        }, {
-            "test_id": 2,
-            "category": "XSS",
-            "payload": "payload 2",
-            "recommendations": "recommendations 2" 
-        }, {
-            "test_id": 3,
-            "category": "Directory Traversal",
-            "payload": "payload 3",
-            "recommendations": "recommendations 3"
-        }],
-        "run_at": "2012-04-23T18:25",
-        "job": {
-            "job_name": "Boj 1",
-            "url": "www.website.com",
-            "endpoint": "the point of end",
-            "test_options": {
-                "option1": true,
-                "option2": false
-            },
-            "datatype": "JSON"
-        }
+  {
+    "id": "2",
+    "tests": {
+      "Test 1": true,
+      "Test 2": true,
+      "Test 3": true,
+      "Test 4": false,
+      "Test 5": false
     },
-    {
-        "id": "2",
-        "tests": {
-            "Test 1": true,
-            "Test 2": true,
-            "Test 3": true,
-            "Test 4": false,
-            "Test 5": false
-        },
-        "vulns": [{
-            "test_id": 1,
-            "category": "Directory Traversal",
-            "payload": "payload 1",
-            "recommendations": "recommendations 1"
-        }, {
-            "test_id": 2,
-            "category": "Directory Traversal",
-            "payload": "payload 2",
-            "recommendations": "recommendations 2" 
-        }, {
-            "test_id": 3,
-            "category": "XSS",
-            "payload": "payload 3",
-            "recommendations": "recommendations 3"
-        }],
-        "run_at": "2012-05-23T18:25",
-        "job": {
-            "job_name": "Boj 2",
-            "url": "www.website.com",
-            "endpoint": "the point of end",
-            "test_options": {
-                "option1": true,
-                "option2": false
-            },
-            "datatype": "JSON"
-        }
-    },
-    {
-        "id": "3",
-        "tests": {
-            "Test 1": false,
-            "Test 2": false,
-            "Test 3": false,
-            "Test 4": false,
-            "Test 5": false
-        },
-        "vulns": [{
-            "test_id": 1,
-            "category": "Not XSS",
-            "payload": "payload 1",
-            "recommendations": "recommendations 1"
-        }, {
-            "test_id": 2,
-            "category": "Not XSS",
-            "payload": "payload 2",
-            "recommendations": "recommendations 2" 
-        }, {
-            "test_id": 3,
-            "category": "Not Directory Traversal",
-            "payload": "payload 3",
-            "recommendations": "recommendations 3"
-        }],
-        "run_at": "2012-06-23T18:25",
-        "job": {
-            "job_name": "Boj 3",
-            "url": "www.website.com",
-            "endpoint": "the point of end",
-            "test_options": {
-                "option1": true,
-                "option2": false
-            },
-            "datatype": "JSON"
-        }
-    },
-    {
-        "id": "4",
-        "tests": {
-            "Test 1": true,
-            "Test 2": true,
-            "Test 3": true,
-            "Test 4": true,
-            "Test 5": true
-        },
-        "vulns": [{
-            "test_id": 1,
-            "category": "Not Directory Traversal",
-            "payload": "payload 1",
-            "recommendations": "recommendations 1"
-        }, {
-            "test_id": 2,
-            "category": "Not Directory Traversal",
-            "payload": "payload 2",
-            "recommendations": "recommendations 2" 
-        }, {
-            "test_id": 3,
-            "category": "Not XSS",
-            "payload": "payload 3",
-            "recommendations": "recommendations 3"
-        }],
-        "run_at": "2012-07-23T18:25",
-        "job": {
-            "job_name": "Boj 4",
-            "url": "www.website.com",
-            "endpoint": "the point of end",
-            "test_options": {
-                "option1": true,
-                "option2": false
-            },
-            "datatype": "JSON"
-        }
-    },
-    {
-        "id": "5",
-        "tests": {
-            "Test 1": false,
-            "Test 2": true,
-            "Test 3": true,
-            "Test 4": true,
-            "Test 5": false
-        },
-        "vulns": [{
-            "test_id": 1,
-            "category": "XSS",
-            "payload": "payload 1",
-            "recommendations": "recommendations 1"
-        }, {
-            "test_id": 2,
-            "category": "XSS",
-            "payload": "payload 2",
-            "recommendations": "recommendations 2" 
-        }, {
-            "test_id": 3,
-            "category": "Directory Traversal",
-            "payload": "payload 3",
-            "recommendations": "recommendations 3"
-        }],
-        "run_at": "2012-08-23T18:25",
-        "job": {
-            "job_name": "Boj 5",
-            "url": "www.website.com",
-            "endpoint": "the point of end",
-            "test_options": {
-                "option1": true,
-                "option2": false
-            },
-            "datatype": "JSON"
-        }
+    "vulns": [
+      {
+        "test_id": 1,
+        "category": "Directory Traversal",
+        "payload": "payload 1",
+        "recommendations": "recommendations 1"
+      },
+      {
+        "test_id": 2,
+        "category": "Directory Traversal",
+        "payload": "payload 2",
+        "recommendations": "recommendations 2"
+      },
+      {
+        "test_id": 3,
+        "category": "XSS",
+        "payload": "payload 3",
+        "recommendations": "recommendations 3"
+      }
+    ],
+    "run_at": "2012-05-23T18:25",
+    "job": {
+      "job_name": "Boj 2",
+      "url": "www.website.com",
+      "endpoint": "the point of end",
+      "test_options": {
+        "option1": true,
+        "option2": false
+      },
+      "datatype": "JSON"
     }
+  },
+  {
+    "id": "3",
+    "tests": {
+      "Test 1": false,
+      "Test 2": false,
+      "Test 3": false,
+      "Test 4": false,
+      "Test 5": false
+    },
+    "vulns": [
+      {
+        "test_id": 1,
+        "category": "Not XSS",
+        "payload": "payload 1",
+        "recommendations": "recommendations 1"
+      },
+      {
+        "test_id": 2,
+        "category": "Not XSS",
+        "payload": "payload 2",
+        "recommendations": "recommendations 2"
+      },
+      {
+        "test_id": 3,
+        "category": "Not Directory Traversal",
+        "payload": "payload 3",
+        "recommendations": "recommendations 3"
+      }
+    ],
+    "run_at": "2012-06-23T18:25",
+    "job": {
+      "job_name": "Boj 3",
+      "url": "www.website.com",
+      "endpoint": "the point of end",
+      "test_options": {
+        "option1": true,
+        "option2": false
+      },
+      "datatype": "JSON"
+    }
+  },
+  {
+    "id": "4",
+    "tests": {
+      "Test 1": true,
+      "Test 2": true,
+      "Test 3": true,
+      "Test 4": true,
+      "Test 5": true
+    },
+    "vulns": [
+      {
+        "test_id": 1,
+        "category": "Not Directory Traversal",
+        "payload": "payload 1",
+        "recommendations": "recommendations 1"
+      },
+      {
+        "test_id": 2,
+        "category": "Not Directory Traversal",
+        "payload": "payload 2",
+        "recommendations": "recommendations 2"
+      },
+      {
+        "test_id": 3,
+        "category": "Not XSS",
+        "payload": "payload 3",
+        "recommendations": "recommendations 3"
+      }
+    ],
+    "run_at": "2012-07-23T18:25",
+    "job": {
+      "job_name": "Boj 4",
+      "url": "www.website.com",
+      "endpoint": "the point of end",
+      "test_options": {
+        "option1": true,
+        "option2": false
+      },
+      "datatype": "JSON"
+    }
+  },
+  {
+    "id": "5",
+    "tests": {
+      "Test 1": false,
+      "Test 2": true,
+      "Test 3": true,
+      "Test 4": true,
+      "Test 5": false
+    },
+    "vulns": [
+      {
+        "test_id": 1,
+        "category": "XSS",
+        "payload": "payload 1",
+        "recommendations": "recommendations 1"
+      },
+      {
+        "test_id": 2,
+        "category": "XSS",
+        "payload": "payload 2",
+        "recommendations": "recommendations 2"
+      },
+      {
+        "test_id": 3,
+        "category": "Directory Traversal",
+        "payload": "payload 3",
+        "recommendations": "recommendations 3"
+      }
+    ],
+    "run_at": "2012-08-23T18:25",
+    "job": {
+      "job_name": "Boj 5",
+      "url": "www.website.com",
+      "endpoint": "the point of end",
+      "test_options": {
+        "option1": true,
+        "option2": false
+      },
+      "datatype": "JSON"
+    }
+  }
 ]

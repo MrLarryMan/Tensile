@@ -1,4 +1,4 @@
-import { getInitialHistoryData, getJobData } from "./fetch.js"
+import { getInitialHistoryData, getJobData, deleteJobData } from "./fetch.js"
 
 addEventListener("DOMContentLoaded", async () => {
 
@@ -13,6 +13,12 @@ addEventListener("DOMContentLoaded", async () => {
     jobSelection.addEventListener("change", async () => {  
         refreshJobInfo(parseInt(jobSelection.value)); 
     });
+
+    const deleteJobButton = document.getElementById("delete-job-btn");
+    deleteJobButton.addEventListener("click", async () => {
+        deleteJob(parseInt(jobSelection.value));
+    });
+
 
 }); 
 
@@ -161,3 +167,17 @@ async function updateJobSummaryInfo(jobData) {
 }
 
 
+async function deleteJob(jobID) {
+    try {
+        const response = await deleteJobData(jobID);
+        if (response) {
+            sessionStorage.removeItem(`jobInfo_${jobID}`);
+            updatePage();
+            alert("Job data deleted successfully");
+        } else {
+            console.error("Failed to delete job data");
+        }
+    } catch (error) {
+        console.error(`Error deleting job data: ${error}`);
+    }
+}

@@ -48,3 +48,20 @@ export async function getJobData(jobID) {
         return null; // Return null on error
     }
 }
+
+export async function deleteJobData(jobID) { 
+    try {
+        const response = await fetch(`${ANALYTICS_BASE_URL}/${jobID}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error(`Response status ${response.status}`);
+        }
+
+        return true;
+        
+    } catch (error) {   
+        console.error(`Fetch failed at ${ANALYTICS_BASE_URL}/${jobID}:`, error);
+        return false; // Return false on error
+    }
+}
