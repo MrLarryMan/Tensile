@@ -1,5 +1,0 @@
-- features:/saved-jobs
-+ GET: what jobs are saved 
-+ POST: save a job 
-+ PUT: change a job  
-+ DELETE: delete a saved job 
