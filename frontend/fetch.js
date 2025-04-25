@@ -1,8 +1,6 @@
 const ANALYTICS_BASE_URL = 'http://localhost:3000/api/analytics'
 
-
 export async function getInitialHistoryData() {
-
     try {
         const response = await fetch(ANALYTICS_BASE_URL);
         if (!response.ok) {
@@ -22,13 +20,13 @@ export async function getInitialHistoryData() {
             d.jobIDs.push(jobResult["id"]); // Fixed object access
             d.run_at.push(jobResult["run_at"]);
             d.tests.push(jobResult["tests"]);
-            d.jobNames.push(jobResult["job"]["job_name"]);
+            d.jobNames.push(jobResult["job"]["job_name"] || "Unknown Job"); 
         });
 
         return d;
 
     } catch (error) {
-        console.error("There was a problem with the fetch request:", error);
+        console.error(`Fetch failed at ${ANALYTICS_BASE_URL}:`, error);
         return { jobs: [], run_at: [], tests: [], jobNames: [] }; // Return an empty dataset on error
     }
 }
@@ -36,7 +34,6 @@ export async function getInitialHistoryData() {
 
 
 export async function getJobData(jobID) { 
-
     try {
         const response = await fetch(`${ANALYTICS_BASE_URL}/${jobID}`);
         if (!response.ok) {
@@ -47,7 +44,7 @@ export async function getJobData(jobID) {
         return data;
         
     } catch (error) {   
-        console.error("There was a problem with the fetch request:", error);
+        console.error(`Fetch failed at ${ANALYTICS_BASE_URL}/${jobID}:`, error);
         return null; // Return null on error
     }
 }
