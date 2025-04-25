@@ -36,6 +36,16 @@
         </div>
 
         <div class="input-group">
+            <label for="request_type">Request Type:</label>
+            <select id="request_type" name="request_type">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+        </div>
+
+        <div class="input-group">
             <label for="datatype">Endpoint Data Type:</label>
             <select id="datatype" name="datatype">
                 <option value="json">JSON</option>
@@ -45,10 +55,8 @@
 
         <fieldset>
             <legend>Select Tests:</legend>
-            <label><input type="checkbox" name="test1" /> Test 1</label>
-            <label><input type="checkbox" name="test2" /> Test 2</label>
-            <label><input type="checkbox" name="test3" /> Test 3</label>
-            <label><input type="checkbox" name="test4" /> Test 4</label>
+            <label><input type="checkbox" name="XSS" /> Test 1</label>
+            <label><input type="checkbox" name="LFI" /> Test 2</label>
         </fieldset>
 
         <div class="button-group">

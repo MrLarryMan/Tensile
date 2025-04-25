@@ -1,13 +1,7 @@
 [
   {
     "id": "2",
-    "tests": {
-      "Test 1": true,
-      "Test 2": true,
-      "Test 3": true,
-      "Test 4": false,
-      "Test 5": false
-    },
+    "status": "Finished",
     "vulns": [
       {
         "test_id": 1,
@@ -42,13 +36,7 @@
   },
   {
     "id": "3",
-    "tests": {
-      "Test 1": false,
-      "Test 2": false,
-      "Test 3": false,
-      "Test 4": false,
-      "Test 5": false
-    },
+    "status": "Finished",
     "vulns": [
       {
         "test_id": 1,
@@ -83,13 +71,7 @@
   },
   {
     "id": "4",
-    "tests": {
-      "Test 1": true,
-      "Test 2": true,
-      "Test 3": true,
-      "Test 4": true,
-      "Test 5": true
-    },
+    "status": "Finished",
     "vulns": [
       {
         "test_id": 1,
@@ -124,13 +106,7 @@
   },
   {
     "id": "5",
-    "tests": {
-      "Test 1": false,
-      "Test 2": true,
-      "Test 3": true,
-      "Test 4": true,
-      "Test 5": false
-    },
+    "status": "Finished",
     "vulns": [
       {
         "test_id": 1,

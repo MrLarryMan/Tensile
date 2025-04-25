@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Input fields and checkboxes references
     const urlInput = document.getElementById("url");
     const endpointInput = document.getElementById("endpoint");
+    const requestTypeSelect = document.getElementById("request_type");
     const datatypeSelect = document.getElementById("datatype");
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     runBtn.addEventListener("click", function () {
         const url = urlInput.value.trim();
         const endpoint = endpointInput.value.trim();
+        const requestType = requestTypeSelect.value;
         const datatype = datatypeSelect.value;
         const selectedTests = Array.from(checkboxes)
             .filter(cb => cb.checked)
@@ -60,18 +62,32 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        showMessage("Ready to run tests (not implemented).");
-        console.log("Running tests with the following details:");
-        console.log("URL:", url);
-        console.log("Endpoint:", endpoint);
-        console.log("Data Type:", datatype);
-        console.log("Selected Tests:", selectedTests);
+        showMessage("Ready to run tests!");
+        // console.log("Running tests with the following details:");
+        // console.log("URL:", url);
+        // console.log("Endpoint:", endpoint);
+        // console.log("Request Type:", requestType);
+        // console.log("Data Type:", datatype);
+        // console.log("Selected Tests:", selectedTests);
+        const options = {
+            method: 'POST',
+            body: {
+                url: url,
+                endpoint: endpoint,
+                request_type: requestType,
+                test_options: selectedTests,
+                datatype: datatype
+            }
+        };
+        // URL for testing. Port number may change in dev or production.
+        fetch("127.0.0.1:3000/createAndRunJob", options)
     });
 
     // Clear button handler
     clearBtn.addEventListener("click", function () {
         urlInput.value = "";
         endpointInput.value = "";
+        requestTypeSelect.selectedIndex = 0;
         datatypeSelect.selectedIndex = 0;
         checkboxes.forEach(cb => cb.checked = false);
         showMessage("");
@@ -81,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saveBtn.addEventListener("click", async function () {
         const url = urlInput.value.trim();
         const endpoint = endpointInput.value.trim();
+        const requestType = requestTypeSelect.value;
         const datatype = datatypeSelect.value;
         const selectedTests = Array.from(checkboxes)
             .filter(cb => cb.checked)
@@ -102,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const jobDetails = {
             url,
             endpoint,
+            requestType,
             datatype,
             selectedTests
         };
