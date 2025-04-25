@@ -10,60 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const datatypeSelect = document.getElementById("datatype");
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    // IndexedDB setup
-    let db;
-    const request = indexedDB.open("JobDatabase", 1);
-
-    request.onupgradeneeded = function (event) {
-        db = event.target.result;
-        if (!db.objectStoreNames.contains("jobs")) {
-            db.createObjectStore("jobs", { keyPath: "id", autoIncrement: true });
-        }
-    };
-
-    request.onsuccess = function (event) {
-        db = event.target.result;
-        console.log("Success");
-    };
-
-    request.onerror = function (event) {
-        console.error("Error with IndexDB:", event.target.error);
-    };
-
-    // Save job details to IndexedDB
-    function saveToIndexedDB(jobDetails) {
-        const transaction = db.transaction("jobs", "readwrite");
-        const store = transaction.objectStore("jobs");
-        const request = store.add(jobDetails);
-
-        request.onsuccess = function () {
-            alert("Success saving to IndexDB");
-        };
-
-        request.onerror = function (event) {
-            console.error("Error Saving:", event.target.error);
-            alert("Failed");
-        };
-    }
-
-    // Retrieve all jobs from IndexedDB
-    function getAllJobsFromIndexedDB() {
-        const transaction = db.transaction("jobs", "readonly");
-        const store = transaction.objectStore("jobs");
-        const request = store.getAll();
-
-        request.onsuccess = function () {
-            console.log("Jobs Retrieved:", request.result);
-            alert("Success");
-        };
-
-        request.onerror = function (event) {
-            console.error("Error Retrieving Jobs", event.target.error);
-            alert("Failure");
-        };
-    }
-
-    // URL validation
+    // Helper for URL validation
     function isValidUrl(url) {
         try {
             new URL(url);
@@ -73,10 +20,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Endpoint validation
+    // Helper for endpoint validation
     function isValidEndpoint(endpoint) {
-        // Endpoint must start with '/' and contain no spaces
         return endpoint.startsWith("/") && !/\s/.test(endpoint);
+    }
+
+    // Helper for showing messages
+    function showMessage(msg, isError = false) {
+        let msgDiv = document.getElementById("job-msg");
+        if (!msgDiv) {
+            msgDiv = document.createElement("div");
+            msgDiv.id = "job-msg";
+            msgDiv.style.margin = "10px 0";
+            document.querySelector(".job-spec-container").prepend(msgDiv);
+        }
+        msgDiv.textContent = msg;
+        msgDiv.style.color = isError ? "red" : "green";
     }
 
     // Enter button handler
@@ -89,20 +48,19 @@ document.addEventListener("DOMContentLoaded", function () {
             .map(cb => cb.name);
 
         if (!url || !endpoint) {
-            alert("Please fill out the URL and Endpoint fields.");
+            showMessage("Please fill out the URL and Endpoint fields.", true);
             return;
         }
-
         if (!isValidUrl(url)) {
-            alert("Please enter a valid URL (e.g., https://example.com).");
+            showMessage("Please enter a valid URL (e.g., https://example.com).", true);
             return;
         }
-
         if (!isValidEndpoint(endpoint)) {
-            alert("Please enter a valid endpoint (e.g., /v1/products). Endpoints must start with '/' and contain no spaces.");
+            showMessage("Please enter a valid endpoint (e.g., /v1/products). Endpoints must start with '/' and contain no spaces.", true);
             return;
         }
 
+        showMessage("Ready to run tests (not implemented).");
         console.log("Running tests with the following details:");
         console.log("URL:", url);
         console.log("Endpoint:", endpoint);
@@ -116,10 +74,11 @@ document.addEventListener("DOMContentLoaded", function () {
         endpointInput.value = "";
         datatypeSelect.selectedIndex = 0;
         checkboxes.forEach(cb => cb.checked = false);
+        showMessage("");
     });
 
     // Save button handler
-    saveBtn.addEventListener("click", function () {
+    saveBtn.addEventListener("click", async function () {
         const url = urlInput.value.trim();
         const endpoint = endpointInput.value.trim();
         const datatype = datatypeSelect.value;
@@ -128,17 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
             .map(cb => cb.name);
 
         if (!url || !endpoint) {
-            alert("Please fill out the URL and Endpoint fields before saving.");
+            showMessage("Please fill out the URL and Endpoint fields before saving.", true);
             return;
         }
-
         if (!isValidUrl(url)) {
-            alert("Please enter a valid URL (e.g., https://example.com).");
+            showMessage("Please enter a valid URL (e.g., https://example.com).", true);
             return;
         }
-
         if (!isValidEndpoint(endpoint)) {
-            alert("Please enter a valid endpoint (e.g., /v1/products). Endpoints must start with '/' and contain no spaces.");
+            showMessage("Please enter a valid endpoint (e.g., /v1/products). Endpoints must start with '/' and contain no spaces.", true);
             return;
         }
 
@@ -146,13 +103,25 @@ document.addEventListener("DOMContentLoaded", function () {
             url,
             endpoint,
             datatype,
-            selectedTests,
-            timestamp: new Date().toISOString()
+            selectedTests
         };
 
-        console.log("Saving job with the following details:", jobDetails);
-
-        // Save job details to IndexedDB
-        saveToIndexedDB(jobDetails);
+        try {
+            const response = await fetch("/api/jobs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jobDetails)
+            });
+            if (!response.ok) {
+                const err = await response.json();
+                showMessage("Failed to save job: " + (err.error || response.statusText), true);
+                return;
+            }
+            showMessage("Job saved successfully!");
+            // Clear form after save
+            clearBtn.click();
+        } catch (error) {
+            showMessage("Failed to save job: " + error.message, true);
+        }
     });
 });
