@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const JOBS_FILE = path.join(__dirname, '../data/jobs.json');
+const JOBS_FILE = path.join(__dirname, '../../data/jobs.json');
 
 function readJobs() {
   if (!fs.existsSync(JOBS_FILE)) fs.writeFileSync(JOBS_FILE, '[]');
