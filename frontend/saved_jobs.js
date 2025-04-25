@@ -150,8 +150,10 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Please select a job first");
             return;
         }
-        alert(`Running job: ${selectedJobId}`);
-        // TODO: Implement actual run logic with API call
+        //alert(`Running job: ${selectedJobId}`);
+
+        // URL for testing. Port number may change in dev or production.
+        fetch(`127.0.0.1:3000/runJob?jobId=${selectedJobId}`)
     }
 
     function handleEditJob() {

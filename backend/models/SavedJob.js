@@ -4,15 +4,17 @@ let savedJobs = [
       job_id: "job0",
       url: "https://google.com",
       endpoint: "/api/test",
-      test_options: { sql_injection: true, data_leak: false},
+      request_type: "GET",
+      test_options: { XSS: true, LFI: false},
       datatype: "json"
     }, 
     {
         job_id: "job1",
         url: "https://umass.edu",
         endpoint: "/api/test",
-        test_options: { sql_injection: false, data_leak: false},
-        datatype: "json"
+        request_type: "POST",
+        test_options: { XSS: false, LFI: true},
+        datatype: "raw"
     }
 ];
   

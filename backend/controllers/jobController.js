@@ -14,13 +14,14 @@ exports.getJobById = (req, res) => {
 
 // POST /api/jobs
 exports.createJob = (req, res) => {
-  const { url, endpoint, datatype, selectedTests } = req.body;
+  const { url, endpoint, datatype, request_type, selectedTests } = req.body;
   if (!url || !endpoint) return res.status(400).json({ error: 'URL and endpoint required' });
+  if (!request_type) return res.status(400).json({ error: 'Request type required' });
   try { new URL(url); } catch { return res.status(400).json({ error: 'Invalid URL' }); }
   if (!endpoint.startsWith('/') || /\s/.test(endpoint)) {
     return res.status(400).json({ error: 'Endpoint must start with "/" and contain no spaces' });
   }
-  const job = Job.create({ url, endpoint, datatype, selectedTests, createdAt: new Date().toISOString() });
+  const job = Job.create({ url, endpoint, datatype, request_type, selectedTests, createdAt: new Date().toISOString() });
   res.status(201).json(job);
 };
 
