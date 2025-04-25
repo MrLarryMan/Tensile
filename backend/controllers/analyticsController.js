@@ -1,9 +1,9 @@
-const jobResult = require('../models/jobResult');
+const jobResultModel = require('../models/jobResult');
 const { NotFoundError } = require('../errors/notFoundError');
 
 exports.getJobResults = async (req, res) => {
     try {
-        const jobResults = await jobResult.getAll();
+        const jobResults = await jobResultModel.getAll();
         res.status(200).json(jobResults);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching job results', error });
@@ -13,7 +13,7 @@ exports.getJobResults = async (req, res) => {
 exports.getJobResultById = async (req, res) => {
     const { id } = req.params;
     try {
-        const jobResult = await jobResult.getById(id);
+        const jobResult = await jobResultModel.getById(id);
         if (!jobResult) {
             throw new NotFoundError(`Job result with id ${id} not found`);
         }
@@ -29,7 +29,7 @@ exports.getJobResultById = async (req, res) => {
 exports.deleteJobResultById = async (req, res) => {
     const { id } = req.params;
     try {
-        const deletedJobResult = await jobResult.deleteById(id);
+        const deletedJobResult = await jobResultModel.deleteById(id);
         if (!deletedJobResult) {
             throw new NotFoundError(`Job result with id ${id} not found`);
         }

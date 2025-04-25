@@ -3,9 +3,15 @@ const path = require('path');
 const JOB_RESULTS_FILE = path.join(__dirname, '../../data/job_results.json');
 
 function readJobResults() {
-    if (!fs.existsSync(JOB_RESULTS_FILE)) fs.writeFileSync(JOB_RESULTS_FILE, '[]');
-    const data = fs.readFileSync(JOB_RESULTS_FILE, 'utf-8');
-    return JSON.parse(data);
+    try {
+        if (!fs.existsSync(JOB_RESULTS_FILE)) fs.writeFileSync(JOB_RESULTS_FILE, '[]');
+        const data = fs.readFileSync(JOB_RESULTS_FILE, 'utf-8');
+        return JSON.parse(data);
+    } catch (err) {
+        console.error("Error reading job results file:", err);
+        return [];
+    }
+    
 }
 
 function writeJobResults(jobResults) {
@@ -14,7 +20,10 @@ function writeJobResults(jobResults) {
 
 exports.getAll = () => readJobResults();
 
-exports.getById = (id) => readJobResults().find(jobResult => jobResult.id === id);
+exports.getById = (id) => {
+    id = id.toString();
+    return readJobResults().find(jobResult => jobResult.id === id);
+}
 
 exports.create = (jobResultData) => {
     const jobResults = readJobResults();
@@ -26,7 +35,7 @@ exports.create = (jobResultData) => {
 
 exports.update = (id, jobResultData) => {
     const jobResults = readJobResults();
-    const idx = jobResults.findIndex(jobResult => jobResult.id === id);
+    const idx = jobResults.findIndex(jobResult => jobResult.id === id.toString());
     if (idx === -1) return null;
     jobResults[idx] = { ...jobResults[idx], ...jobResultData };
     writeJobResults(jobResults);
@@ -35,7 +44,7 @@ exports.update = (id, jobResultData) => {
 
 exports.delete = (id) => {  
     const jobResults = readJobResults();
-    const idx = jobResults.findIndex(jobResult => jobResult.id === id);
+    const idx = jobResults.findIndex(jobResult => jobResult.id === id.toString());
     if (idx === -1) return false;
     jobResults.splice(idx, 1);
     writeJobResults(jobResults);
