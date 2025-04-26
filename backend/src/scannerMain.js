@@ -55,14 +55,14 @@ exports.runJob = (jobId) => {
 }
 
 exports.createAndRunJob = async (spec) => {
-    const newjob = await SavedJob.create(spec);
+    const newJob = await SavedJob.create(spec);
     return runJob(newJob.job_id);
 }
 
 exports.terminateJob = async (resultId) => {
-    const jobResult = await jobResultModel.getById(id);
+    const jobResult = await jobResultModel.getById(resultId);
     if (!jobResult) {
-        throw new Error(`Job result with id ${id} not found`);
+        throw new Error(`Job result with id ${resultId} not found`);
     }
     if (jobResult.status != "Running") {
         return false;
