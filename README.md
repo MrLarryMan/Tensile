@@ -2,6 +2,7 @@
 # Group 2 (Online)'s Project for CS 326 | UMass S2025
 
 Milestone 5 Slides: https://docs.google.com/presentation/d/10x4AWYZwSRQiX1iUwnJaYer0GjebVTNgct2YtyI6G84/
+Milestone 6 Slides: https://docs.google.com/presentation/d/1vff79JB6rgqe9MZ8YkBJ0jY7aVIFnR90nX1QICuMRgs/
 
 # An Automated Web Vulnerability Scanner
 
