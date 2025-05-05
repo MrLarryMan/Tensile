@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const jobRoutes = require('../routes/jobRoutes');
 const savedJobRoutes = require('../routes/savedJobRoutes');
-const analyticsRoutes = require('../routes/analyticsRoutes');
+const sequelize = require('../sequelize');
+const Job = require('../models/Job');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,8 @@ app.use('/api/analytics', analyticsRoutes);
 // Serve the frontend
 app.use(express.static(path.join(__dirname, '../../frontend')));
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
