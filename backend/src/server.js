@@ -3,7 +3,7 @@ const path = require('path');
 const jobRoutes = require('../routes/jobRoutes');
 const savedJobRoutes = require('../routes/savedJobRoutes');
 const sequelize = require('../sequelize');
-const Job = require('../models/Job');
+const { Job, JobResult, Vulnerability } = require('../models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

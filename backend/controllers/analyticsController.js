@@ -1,4 +1,5 @@
-const JobResult = require('../models/jobResult');
+const models = require('../models');
+const JobResult = models.JobResult;
 
 exports.getJobResults = async (req, res) => {
     try {

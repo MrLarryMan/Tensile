@@ -1,23 +1,30 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
 
-const JobResult = sequelize.define('JobResult', {
-    jobResultId: {
+const User = sequelize.define('User', {
+    accountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    status: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    run_at: {
+    password: {
         type: DataTypes.STRING,
-        allowNull: false,   
+        allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
     }
 }, {
     updatedAt: false,
 });
 
-
-module.exports = JobResult;
+module.exports = User;
