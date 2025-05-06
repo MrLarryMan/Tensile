@@ -1,8 +1,12 @@
-const jobResultModel = require('../models/jobResultModel');
+const JobResult = require('../models/jobResult');
 
 exports.getJobResults = async (req, res) => {
     try {
-        const jobResults = await jobResultModel.getAll();
+        const jobResults = await JobResult.findAll({
+            include: [
+                { model: Job, as: 'job' }, 
+                { model: Vulnerability, as: 'vulnerabilities' }] 
+            });
         res.status(200).json(jobResults);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching job results', error });
@@ -12,9 +16,13 @@ exports.getJobResults = async (req, res) => {
 exports.getJobResultById = async (req, res) => {
     const { id } = req.params;
     try {
-        const jobResult = await jobResultModel.getById(id);
+        const jobResult = await JobResult.findByPk(id, {
+            include: [
+                { model: Job, as: 'job' }, 
+                { model: Vulnerability, as: 'vulnerabilities' }] 
+            });
         if (!jobResult) {
-            throw new Error(`Job result with id ${id} not found`);
+            return res.status(404).json({ message: `Job result with id ${id} not found` });
         }
         res.status(200).json(jobResult);
     } catch (error) {
@@ -25,9 +33,11 @@ exports.getJobResultById = async (req, res) => {
 exports.deleteJobResultById = async (req, res) => {
     const { id } = req.params;
     try {
-        const deletedJobResult = await jobResultModel.deleteById(id);
-        if (!deletedJobResult) {
-            throw new Error(`Job result with id ${id} not found`);
+        const deleted = await JobResult.destroy({
+            where: { jobResultId: id }
+        });
+        if (!deleted) {
+            return res.status(404).json({ message: `Job result with id ${id} not found` });
         }
         res.status(200).json({ message: 'Job result deleted successfully' });
     } catch (error) {
