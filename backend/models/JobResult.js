@@ -21,22 +21,6 @@ const JobResult = sequelize.define('JobResult', {
     updatedAt: false,
 });
 
-const Vulnerability = sequelize.define('Vulnerability', {
-    category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    payload: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    recommendations: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    }
-}, {
-    updatedAt: false,
-});
 
 // Define the relationship between JobResult and Vulnerability
 JobResult.hasMany(Vulnerability, { foreignKey: 'jobResultId' });
