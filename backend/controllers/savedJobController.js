@@ -37,7 +37,7 @@ exports.createSavedJob = async (req, res, next) => {
 // PUT: update saved job
 exports.updateSavedJob = async (req, res, next) => {
   try {
-    const updatedJob = SavedJob.update(req.params.jobId, req.body);
+    const updatedJob = Job.update(req.params.jobId, req.body);
     if (!updatedJob) {
       throw new NotFoundError('Job not found');
     }

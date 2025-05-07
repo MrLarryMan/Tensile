@@ -1,39 +1,44 @@
-class SavedJob {
-  static getAll() {
-    return savedJobs;
-  }
+const { DataTypes } = require('sequelize');
+const sequelize = require('../sequelize');
 
-  static getById(jobId) {
-    return savedJobs.find(job => job.job_id === jobId);
-  }
-
-  static create(newJob) {
-    // generate id if not have
-    if (!newJob.job_id) {
-      newJob.job_id = `job_${Date.now()}`;
+const SavedJob = sequelize.define('Job', {
+  jobId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  jobName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  url: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  endpoint: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  selectedTests: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    get() {
+      return JSON.parse(this.getDataValue('selectedTests'));
+    },
+    set(val) {
+      this.setDataValue('selectedTests', JSON.stringify(val));
     }
-    
-    savedJobs.push(newJob);
-    return newJob;
+  },
+  datatype: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   }
-
-  static update(jobId, updatedJob) {
-    const index = savedJobs.findIndex(job => job.job_id === jobId);
-    if (index === -1) return null;
-    
-    // Preserve original ID
-    updatedJob.job_id = jobId;
-    savedJobs[index] = updatedJob;
-    return savedJobs[index];
-  }
-
-  static delete(jobId) {
-    const index = savedJobs.findIndex(job => job.job_id === jobId);
-    if (index === -1) return false;
-    
-    savedJobs.splice(index, 1);
-    return true;
-  }
-}
+}, {
+  updatedAt: false
+});
 
 module.exports = SavedJob;

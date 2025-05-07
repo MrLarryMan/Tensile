@@ -6,13 +6,14 @@ const Job = require('./Job.js');
 const JobResult = require('./jobResult.js');
 const Vulnerability = require('./Vulnerabilty.js');
 const User = require('./User.js'); // change when user is changed to sequelize model
-//SavedJob = require('./SavedJob.js'); change when savedjob is changed to sequelize model
+const SavedJob = require('./SavedJob.js'); // change when saved job is changed to sequelize model
 
 const models = {
     Job,
     JobResult,
     Vulnerability,
-    User, 
+    User,
+    SavedJob
 };
 
 // Define the relationship between JobResult and Vulnerability
@@ -20,12 +21,12 @@ JobResult.hasMany(Vulnerability, { foreignKey: 'jobResultId', as: 'vulnerabiliti
 Vulnerability.belongsTo(JobResult, { foreignKey: 'jobResultId', as: 'jobResult' });
 
 // Define the relationship between JobResult and Job
-JobResult.hasOne(Job, { foreignKey: 'jobResultId', as: 'job' });
-Job.belongsTo(JobResult, { foreignKey: 'jobResultId', as: 'jobResult'});
+JobResult.hasOne(SavedJob, { foreignKey: 'jobResultId', as: 'savedJob' });
+SavedJob.belongsTo(JobResult, { foreignKey: 'jobResultId', as: 'jobResult'});
 
 //Define the relationship between User and Job and JobResult
-User.hasMany(Job, { foreignKey: 'userId', as: 'jobs' });
-Job.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+User.hasMany(SavedJob, { foreignKey: 'userId', as: 'savedJobs' });
+SavedJob.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 User.hasMany(JobResult, { foreignKey: 'userId', as: 'jobResults' });
 JobResult.belongsTo(User, { foreignKey: 'userId', as: 'user' });
