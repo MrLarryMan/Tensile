@@ -7,6 +7,22 @@ const SavedJob = sequelize.define('SavedJob', {
     primaryKey: true,
     autoIncrement: true,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'user',
+      key: 'userId'
+    },
+    allowNull: false,
+  },
+  jobResultId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'jobResults',
+      key: 'jobResultId'
+    },
+    allowNull: false,
+  },
   jobName: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -38,6 +54,7 @@ const SavedJob = sequelize.define('SavedJob', {
     defaultValue: DataTypes.NOW,
   }
 }, {
+  tableName: 'savedJobs',
   updatedAt: false,
 });
 

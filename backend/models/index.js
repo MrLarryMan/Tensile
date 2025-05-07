@@ -17,7 +17,7 @@ const models = {
 };
 
 // Define the relationship between JobResult and Vulnerability
-JobResult.hasMany(Vulnerability, { foreignKey: 'jobResultId', as: 'vulnerabilities' });
+JobResult.hasMany(Vulnerability, { foreignKey: 'jobResultId', as: 'vulns' });
 Vulnerability.belongsTo(JobResult, { foreignKey: 'jobResultId', as: 'jobResult' });
 
 // Define the relationship between JobResult and Job
@@ -31,4 +31,4 @@ SavedJob.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 User.hasMany(JobResult, { foreignKey: 'userId', as: 'jobResults' });
 JobResult.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
-module.exports = models;
+module.exports = models; 

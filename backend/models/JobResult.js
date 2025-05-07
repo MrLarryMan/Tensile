@@ -7,6 +7,14 @@ const JobResult = sequelize.define('JobResult', {
         primaryKey: true,
         autoIncrement: true,
     },
+    userId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'userId'
+        },
+        allowNull: false,
+    },
     status: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -16,6 +24,7 @@ const JobResult = sequelize.define('JobResult', {
         allowNull: false,   
     }
 }, {
+    tableName: 'jobResults',
     updatedAt: false,
 });
 

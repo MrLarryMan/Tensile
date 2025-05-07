@@ -6,8 +6,9 @@ exports.getJobResults = async (req, res) => {
         const jobResults = await JobResult.findAll({
             include: [
                 { model: SavedJob, as: 'savedJob' }, 
-                { model: Vulnerability, as: 'vulnerabilities' }] 
-            });
+                { model: Vulnerability, as: 'vulns' }] 
+        });
+        
         res.status(200).json(jobResults);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching job results', error });
@@ -19,8 +20,8 @@ exports.getJobResultById = async (req, res) => {
     try {
         const jobResult = await JobResult.findByPk(id, {
             include: [
-                { model: Job, as: 'job' }, 
-                { model: Vulnerability, as: 'vulnerabilities' }] 
+                { model: SavedJob, as: 'savedJob' }, 
+                { model: Vulnerability, as: 'vulns' }] 
             });
         if (!jobResult) {
             return res.status(404).json({ message: `Job result with id ${id} not found` });

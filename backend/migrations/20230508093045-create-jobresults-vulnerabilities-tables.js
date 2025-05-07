@@ -1,5 +1,5 @@
 'use strict';
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports  = {
     up: async (queryInterface, Sequelize) => {
@@ -8,6 +8,14 @@ module.exports  = {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
+            },
+            userId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'users',
+                    key: 'userId'
+                },
+                allowNull: false,
             },
             status: {
                 type: Sequelize.STRING,
@@ -23,7 +31,8 @@ module.exports  = {
             },
         });
 
-        await queryInterface.createTable('vulnerabilities', {
+        await queryInterface.createTable('vulns', {
+            timestamps: false,
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -46,14 +55,14 @@ module.exports  = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            recommendation: {
+            recommendations: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
             
         });
 
-        await queryInterface.createTable('SavedJobs', {
+        await queryInterface.createTable('savedJobs', {
             jobId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -67,6 +76,14 @@ module.exports  = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL'
+            },
+            userId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'users',
+                    key: 'userId'
+                },
+                allowNull: false,
             },
             jobName: {
                 type: Sequelize.STRING,
@@ -92,12 +109,41 @@ module.exports  = {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW,
             },
-        })
+        });
+
+        await queryInterface.createTable('users', {
+            userId: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            username: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            password: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            email: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            createdAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            },
+        });
     },
 
+
+    
+
+    
     down: async (queryInterface, Sequelize) => {
         await queryInterface.dropTable('JobResults');
-        await queryInterface.dropTable('Vulnerabilities');
+        await queryInterface.dropTable('vulns');
         await queryInterface.dropTable('SavedJobs');
+        await queryInterface.dropTable('users');
     }
 }
