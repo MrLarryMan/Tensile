@@ -24,7 +24,7 @@ module.exports  = {
         });
 
         await queryInterface.createTable('vulnerabilities', {
-            vulnerabilityId: {
+            id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -53,7 +53,7 @@ module.exports  = {
             
         });
 
-        await queryInterface.createTable('savedJobs', {
+        await queryInterface.createTable('SavedJobs', {
             jobId: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,

@@ -1,11 +1,11 @@
-const models = require('../models');
-const JobResult = models.JobResult;
+const { JobResult, SavedJob, Vulnerability} = require('../models');
+
 
 exports.getJobResults = async (req, res) => {
     try {
         const jobResults = await JobResult.findAll({
             include: [
-                { model: Job, as: 'job' }, 
+                { model: SavedJob, as: 'savedJob' }, 
                 { model: Vulnerability, as: 'vulnerabilities' }] 
             });
         res.status(200).json(jobResults);

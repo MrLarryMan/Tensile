@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
 
-const SavedJob = sequelize.define('Job', {
+const SavedJob = sequelize.define('SavedJob', {
   jobId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -38,7 +38,7 @@ const SavedJob = sequelize.define('Job', {
     defaultValue: DataTypes.NOW,
   }
 }, {
-  updatedAt: false
+  updatedAt: false,
 });
 
 module.exports = SavedJob;

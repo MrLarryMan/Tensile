@@ -1,5 +1,5 @@
 'use strict';
-const { Sequelize } = require('sequelize');
+const { Sequelize, json } = require('sequelize');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -15,9 +15,9 @@ module.exports = {
         run_at: new Date(),
       },
     ], {});
-    
+
     await queryInterface.bulkInsert('savedJobs', [
-     {
+     {  
         jobName: 'Test Job 1',
         url: 'https://example.com/job1',
         endpoint: '/api/job1',
