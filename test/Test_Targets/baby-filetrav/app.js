@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
-const PORT = 3000;
+const PORT = 4000;
 
 // ❌ Directory that should be restricted
 const SAFE_DIR = path.join(__dirname, 'public');

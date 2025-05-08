@@ -97,6 +97,10 @@ module.exports  = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            parameter: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             selectedTests: {
                 type: Sequelize.TEXT,
                 allowNull: false,
