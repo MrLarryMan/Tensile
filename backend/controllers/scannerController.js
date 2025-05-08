@@ -14,7 +14,7 @@ exports.jobStatus = async (req, res) => {
 // POST, runs a job by its id. Will return the job result id (not necessarily finished running).
 exports.runJob = async (req, res) => {
     try {
-        const jobResult = await scannerMain.runJob(req.params.resultId);
+        const jobResult = await scannerMain.runJob(req.params.jobId);
         res.status(200).json(jobResult);
     } catch (error) {
         res.status(500).json({ message: 'Error running job', error });

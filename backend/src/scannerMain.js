@@ -50,7 +50,7 @@ exports.runJob = async (jobId) => {
             }).catch(async (error) => {
                 result.status = "Failed";
                 await result.save();
-                console.log("XSSFinished with error!");
+                console.log("XSS Finished with error!");
             });
             return result.jobResultId;
         } else if(tests[i] === "pathTraversal") {
