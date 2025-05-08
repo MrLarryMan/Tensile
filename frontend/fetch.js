@@ -13,13 +13,14 @@ export async function getInitialHistoryData() {
             jobIDs: [],
             run_at: [],
             tests: [],
+            vulns: [],
             jobNames: [],
         };
 
         data.forEach(jobResult => {
             d.jobIDs.push(jobResult["jobResultId"]); // Fixed object access
             d.run_at.push(jobResult["run_at"]);
-            d.tests.push(jobResult["vulns"]);
+            d.vulns.push(jobResult["vulns"]);
             d.jobNames.push(jobResult["savedJob"]["jobName"] || "Unknown Job"); 
         });
 
@@ -27,7 +28,7 @@ export async function getInitialHistoryData() {
 
     } catch (error) {
         console.error(`Fetch failed at ${ANALYTICS_BASE_URL}:`, error);
-        return { jobs: [], run_at: [], tests: [], jobNames: [] }; // Return an empty dataset on error
+        return { jobs: [], run_at: [], tests: [], vulns: [], jobNames: [] }; // Return an empty dataset on error
     }
 }
 

@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("confirm-modal-yes").addEventListener("click", confirmDelete);
     document.getElementById("confirm-modal-no").addEventListener("click", () => deleteModal.close());
     document.getElementById("cancel-form").addEventListener("click", () => jobFormModal.close());
-    jobForm.addEventListener("submit", handleFormSubmit);
+    jobForm.addEventListener("click", handleFormSubmit);
 
     async function initPage() {
         try {
@@ -113,23 +113,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function populateJobSelect(jobs) {
         jobSelect.innerHTML = '<option value="">-- Select a Job --</option>';
-        
         jobs.forEach(job => {
             const option = document.createElement('option');
-            option.value = job.job_id;
-            option.textContent = job.job_id || `Job ${job.url}`;
+            option.value = job.jobId;
+            option.textContent = job.jobName;
             jobSelect.appendChild(option);
         });
     }
 
     function handleJobSelect(event) {
-        selectedJobId = event.target.value;
+        selectedJobId = parseInt(event.target.value);
         if (!selectedJobId) {
             detailsBox.style.display = "none";
             return;
         }
 
-        const selectedJob = currentJobs.find(job => job.job_id === selectedJobId);
+        const selectedJob = currentJobs.find(job => job.jobId === selectedJobId);
         if (selectedJob) {
             displayJobDetails(selectedJob);
             detailsBox.style.display = "block";
@@ -137,12 +136,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayJobDetails(job) {
-        document.getElementById("job-id").textContent = job.job_id;
-        document.getElementById("job-name").textContent = job.job_id || `Job ${job.url}`;
+        document.getElementById("jobId").textContent = job.jobId;
+        document.getElementById("job-name").textContent = job.jobName;
         document.getElementById("url").textContent = job.url;
         document.getElementById("endpoint").textContent = job.endpoint;
-        document.getElementById("test-options").textContent = JSON.stringify(job.test_options, null, 2);
+        document.getElementById("test-options").textContent = JSON.stringify(job.selectedTests, null, 2);
         document.getElementById("datatype").textContent = job.datatype;
+        document.getElementById("parameter").textContent = job.parameter;
     }
 
     function handleRunJob() {
@@ -162,17 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         
-        const jobToEdit = currentJobs.find(job => job.job_id === selectedJobId);
+        const jobToEdit = currentJobs.find(job => job.jobId === selectedJobId);
         if (jobToEdit) {
-            document.getElementById("form-modal-title").textContent = "Edit Job";
-            document.getElementById("form-job-id").value = jobToEdit.job_id;
+            document.getElementById("form-jobName").value = jobToEdit.jobName;
             document.getElementById("form-url").value = jobToEdit.url;
             document.getElementById("form-endpoint").value = jobToEdit.endpoint;
-            
-            document.querySelector("input[name='test-ssl']").checked = jobToEdit.test_options.ssl || false;
-            document.querySelector("input[name='test-latency']").checked = jobToEdit.test_options.latency || false;
-            document.querySelector("input[name='test-uptime']").checked = jobToEdit.test_options.uptime || false;
-            
+            document.getElementById("form-parameter").value = jobToEdit.parameter;
             document.getElementById("form-datatype").value = jobToEdit.datatype;
             jobFormModal.showModal();
         }
@@ -207,31 +202,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function handleFormSubmit(event) {
         event.preventDefault();
-        
-        const jobId = document.getElementById("form-job-id").value;
+
+        const jobName = document.getElementById("form-jobName").value;
         const url = document.getElementById("form-url").value;
         const endpoint = document.getElementById("form-endpoint").value;
+        const parameter = document.getElementById("form-parameter").value;
         const datatype = document.getElementById("form-datatype").value;
-        
-        const testOptions = {
-            ssl: document.querySelector("input[name='test-ssl']").checked,
-            latency: document.querySelector("input[name='test-latency']").checked,
-            uptime: document.querySelector("input[name='test-uptime']").checked
-        };
-        
+        const selectedTests = document.getElementById("test-options").value;
+
         const jobData = {
-            url,
-            endpoint,
-            test_options: testOptions,
-            datatype
+            jobId: selectedJobId,
+            jobName: jobName,
+            url: url,
+            endpoint: endpoint,
+            parameter: parameter,
+            selectedTests: selectedTests,
+            datatype: datatype,
         };
         
         // if we have a jobId, we're updating, otherwise creating
-        const isUpdate = !!jobId;
+        const isUpdate = true;
         
         try {
             const response = await fetch(
-                isUpdate ? `${API_BASE_URL}/${jobId}` : API_BASE_URL,
+                isUpdate ? `${API_BASE_URL}/${selectedJobId}` : API_BASE_URL,
                 {
                     method: isUpdate ? 'PUT' : 'POST',
                     headers: {

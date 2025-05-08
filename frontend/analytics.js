@@ -26,7 +26,7 @@ async function updatePage() {
     try {
         const data = await getInitialHistoryData();
         if (data && data["jobIDs"].length > 0) {
-            buildHistoryGraph(data["run_at"], data["tests"]);
+            buildHistoryGraph(data["run_at"], data["vulns"]);
             updateJobSelectionInfo(data["jobIDs"], data["jobNames"]); //set job selection options
             refreshJobInfo(data["jobIDs"][0]); // Load initial job info
         }
@@ -171,12 +171,10 @@ async function updateFailedTestInfo(vuln_id) {
 }
 
 async function updateJobSummaryInfo(jobData) {
-    const testResults = Object.values(jobData["vulns"]) || {};
-    if (testResults.length === 0) return;
-    const passed_tests = testResults.reduce((acc, test) => acc + (test ? 1 : 0), 0);
     const job_summary = document.getElementById("passed-info");
-    job_summary.innerHTML = ` ${passed_tests} out of ${testResults.length} tests passed`;
-
+    console.log(jobData.selectedTests, jobData.vulns);
+    const passed_tests = jobData.savedJob.selectedTests.length - jobData.vulns.length
+    job_summary.innerHTML = ` ${passed_tests} out of ${jobData.savedJob.selectedTests.length} tests passed`;
     const job_information = document.getElementById("job-information");
     job_information.innerHTML = `<strong>${jobData.savedJob.jobName}</strong> | Ran on: ${new Date(jobData.run_at).toLocaleDateString()} found ${jobData.vulns.length} vulnerabilities.`;
 }

@@ -15,7 +15,7 @@ module.exports  = {
                     model: 'users',
                     key: 'userId'
                 },
-                allowNull: false,
+                allowNull: true,
             },
             status: {
                 type: Sequelize.STRING,
@@ -83,11 +83,11 @@ module.exports  = {
                     model: 'users',
                     key: 'userId'
                 },
-                allowNull: false,
+                allowNull: true,
             },
             jobName: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
             },
             url: {
                 type: Sequelize.STRING,
