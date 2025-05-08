@@ -35,6 +35,19 @@ async function updatePage() {
     }
 }
 
+function stepSizeSetter(dates) {
+    const properDates = dates.map(run_at => new Date(run_at));
+    const diff = properDates[properDates.length-1] - properDates[0];
+    const hours = diff / (1000 * 60);
+    const minutes = hours / 60;
+    const days = hours / 24;
+
+    if (minutes < 60) return { unit: 'minute', stepSize: 5 };
+    if (hours < 24) return { unit: 'hour', stepSize: 1 };
+    if (days < 30) return { unit: 'day', stepSize: 1 };
+    return { unit: 'month', stepSize: 1 };
+}
+
 function buildHistoryGraph(run_ats, tests) {
     const graph = document.getElementById("graph-history").getContext("2d");
     if (!graph) {
@@ -62,10 +75,12 @@ function buildHistoryGraph(run_ats, tests) {
             responsive: true,
             scales: {
                 xAxes: [{
-                    type: 'time',
-                    time: {
-                        unit: 'day'
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 10
                     },
+                    type: 'time',
+                    time: stepSizeSetter(run_ats),
                     scaleLabel: {
                         display: true,
                         labelString: 'Run Date'
@@ -120,19 +135,19 @@ function updateFailedTestSelectionOptions(jobInfo) {
     const failedTestsSelections = document.getElementById("failed-tests");
     const vulnList = jobInfo["vulns"] || [];
     failedTestsSelections.replaceChildren(); // Clear existing options
-    for (const vuln of vulnList) {
+    for (let i = 0; i < vulnList.length; i++){
         const option = document.createElement("option");
-        option.value = vuln["test_id"];
-        option.textContent = `${vuln["category"]}: ${vuln["payload"]}`;
+        option.value = i;
+        option.textContent = `${vulnList[i]["category"]}`;
         failedTestsSelections.appendChild(option);
     }
     if(vulnList.length > 0) {
-        updateFailedTestInfo(vulnList[0]["test_id"]); // Update info for the first option
+        updateFailedTestInfo(0); // Update info for the first option
     }
     
 }
 
-async function updateFailedTestInfo(test_id) {
+async function updateFailedTestInfo(vuln_id) {
     try{
         const job_id = parseInt(document.getElementById("Past Jobs").value);
         let jobInfo = sessionStorage.getItem(`jobInfo_${job_id}`);
@@ -144,11 +159,11 @@ async function updateFailedTestInfo(test_id) {
             jobInfo = JSON.parse(jobInfo);
         }
         const vulnList = jobInfo["vulns"] || [];
-        const vulnInfo = vulnList.find(v => v["test_id"] === test_id);
+        const vulnInfo = vulnList[vuln_id];
         if (vulnInfo) {
             document.getElementsByClassName("failed-test-info")[0].innerHTML = vulnInfo["recommendations"];  
         } else {
-            console.warn("vulnInfo not found for test_id:", test_id);
+            console.warn("vulnInfo not found for test_id:", vuln_id);
         }
     } catch(error) {
         console.error(`Error fetching failed test info: ${error}`)
@@ -156,21 +171,21 @@ async function updateFailedTestInfo(test_id) {
 }
 
 async function updateJobSummaryInfo(jobData) {
-    const testResults = Object.values(jobData["tests"]) || {};
+    const testResults = Object.values(jobData["vulns"]) || {};
     if (testResults.length === 0) return;
     const passed_tests = testResults.reduce((acc, test) => acc + (test ? 1 : 0), 0);
     const job_summary = document.getElementById("passed-info");
     job_summary.innerHTML = ` ${passed_tests} out of ${testResults.length} tests passed`;
 
     const job_information = document.getElementById("job-information");
-    job_information.innerHTML = `<strong>${jobData["job"]["job_name"]}</strong> | Ran on: ${new Date(jobData["run_at"]).toLocaleDateString()} found ${jobData["vulns"].length} vulnerabilities.`;
+    job_information.innerHTML = `<strong>${jobData.savedJob.jobName}</strong> | Ran on: ${new Date(jobData.run_at).toLocaleDateString()} found ${jobData.vulns.length} vulnerabilities.`;
 }
 
 
 async function deleteJob(jobID) {
     try {
         const response = await deleteJobData(jobID);
-        if (response) {
+        if (response) {ç
             sessionStorage.removeItem(`jobInfo_${jobID}`);
             updatePage();
             alert("Job data deleted successfully");
