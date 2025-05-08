@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const scannerController = require('../controllers/scannerController');
 
-router.get('/:resultId', scannerController.jobStatus);
-router.post('/', scannerController.createAndRunJob);
-router.post('/:jobId',  scannerController.runJob);
-router.delete('/:resultId', scannerController.terminateJob);
+router.get('/jobStatus/:resultId', scannerController.jobStatus);
+router.post('/runJob/:jobId',  scannerController.runJob);
+router.delete('/terminateJob/:resultId', scannerController.terminateJob);
+router.post('/createAndRunJob/', scannerController.createAndRunJob);
 
 module.exports = router;

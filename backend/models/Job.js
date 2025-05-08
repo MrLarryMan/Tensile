@@ -10,6 +10,10 @@ const Job = sequelize.define('Job', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  requestType: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   parameter: {
     type: DataTypes.STRING,
     allowNull: true,

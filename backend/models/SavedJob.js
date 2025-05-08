@@ -21,13 +21,17 @@ const SavedJob = sequelize.define('SavedJob', {
       model: 'jobResults',
       key: 'jobResultId'
     },
-    allowNull: false,
+    allowNull: true,
   },
   jobName: {
     type: DataTypes.STRING,
     allowNull: true,
   },
   url: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  requestType: {
     type: DataTypes.STRING,
     allowNull: false,
   },

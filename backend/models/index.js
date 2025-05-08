@@ -25,8 +25,8 @@ JobResult.hasOne(SavedJob, { foreignKey: 'jobResultId', as: 'savedJob' });
 SavedJob.belongsTo(JobResult, { foreignKey: 'jobResultId', as: 'jobResult'});
 
 //Define the relationship between User and Job and JobResult
-User.hasMany(SavedJob, { foreignKey: 'userId', as: 'savedJobs' });
-SavedJob.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+// User.hasMany(SavedJob, { foreignKey: 'userId', as: 'savedJobs' });
+// SavedJob.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 User.hasMany(JobResult, { foreignKey: 'userId', as: 'jobResults' });
 JobResult.belongsTo(User, { foreignKey: 'userId', as: 'user' });
