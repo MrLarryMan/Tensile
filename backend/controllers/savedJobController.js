@@ -1,10 +1,10 @@
-const { Job } = require('../models');
+const { SavedJob } = require('../models');
 const { NotFoundError } = require('../errors');
 
 // GET: get all saved jobs
 exports.getSavedJobs = async (req, res, next) => {
   try {
-    const jobs = Job.findAll();
+    const jobs = await SavedJob.findAll();
     res.json(jobs);
   } catch (err) {
     next(err);
@@ -14,7 +14,7 @@ exports.getSavedJobs = async (req, res, next) => {
 // GET: get single saved job -- by jobId
 exports.getSavedJob = async (req, res, next) => {
   try {
-    const job = Job.findByPk(req.params.jobId);
+    const job = await SavedJob.findByPk(req.params.jobId);
     if (!job) {
       throw new NotFoundError('Job not found');
     }
@@ -27,7 +27,7 @@ exports.getSavedJob = async (req, res, next) => {
 // POST: create new saved job
 exports.createSavedJob = async (req, res, next) => {
   try {
-    const newJob = Job.create(req.body);
+    const newJob = await SavedJob.create(req.body);
     res.status(201).json(newJob);
   } catch (err) {
     next(err);
@@ -37,7 +37,10 @@ exports.createSavedJob = async (req, res, next) => {
 // PUT: update saved job
 exports.updateSavedJob = async (req, res, next) => {
   try {
-    const updatedJob = Job.update(req.params.jobId, req.body);
+    const updatedJob = await SavedJob.update(
+      req.body, 
+      { where: { jobId: req.params.jobId } }
+    );
     if (!updatedJob) {
       throw new NotFoundError('Job not found');
     }
@@ -50,7 +53,9 @@ exports.updateSavedJob = async (req, res, next) => {
 // DELETE: delete saved job
 exports.deleteSavedJob = async (req, res, next) => {
   try {
-    const success = SavedJob.delete(req.params.jobId);
+    const success = await SavedJob.destroy({
+      where: { jobId: req.params.jobId}
+    });
     if (!success) {
       throw new NotFoundError('Job not found');
     }

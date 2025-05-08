@@ -32,8 +32,10 @@
         </select>
         <div class="text-box" id="details-box">
             <h3 id="job-name"></h3>
+            <p style="display: none;"><span style="display: none;" id="jobId"></span></p>
             <p><strong>URL:</strong> <span id="url"></span></p>
             <p><strong>Endpoint:</strong> <span id="endpoint"></span></p>
+            <p><strong>Parameter</strong> <span id="parameter"></span></p>
             <p><strong>Test Options:</strong> <span id="test-options"></span></p>
             <p><strong>Datatype:</strong> <span id="datatype"></span></p>
         </div>
@@ -51,6 +53,19 @@
         <div>
             <button id="confirm-modal-yes">Yes</button>
             <button id="confirm-modal-no">No</button>
+        </div>
+    </dialog>
+
+    <dialog id="job-form-modal">
+        <h3>Edit Job</h3>
+        <input type="text" id="form-jobName">
+        <input type="text" id="form-url">
+        <input type="text" id="form-endpoint">
+        <input type="text" id="form-parameter">
+        <input type="text" id="form-datatype">
+        <div>
+            <button id="job-form">Submit</button>
+            <button id="cancel-form">Cancel</button>
         </div>
     </dialog>
 

@@ -13,7 +13,7 @@ const JobResult = sequelize.define('JobResult', {
             model: 'user',
             key: 'userId'
         },
-        allowNull: false,
+        allowNull: null,
     },
     status: {
         type: DataTypes.STRING,

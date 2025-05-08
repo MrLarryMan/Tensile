@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 // Import models
 const Job = require('./Job.js');
-const JobResult = require('./jobResult.js');
+const JobResult = require('./JobResult.js');
 const Vulnerability = require('./Vulnerabilty.js');
 const User = require('./User.js'); // change when user is changed to sequelize model
 const SavedJob = require('./SavedJob.js'); // change when saved job is changed to sequelize model
