@@ -28,5 +28,4 @@ const JobResult = sequelize.define('JobResult', {
     updatedAt: false,
 });
 
-
 module.exports = JobResult;

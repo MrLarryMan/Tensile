@@ -36,6 +36,11 @@
         </div>
 
         <div class="input-group">
+            <label for="Parameter">Parameter:</label>
+            <input type="text" id="Parameter" name="parameter" placeholder="e.g. 'input'. Leave blank for no param"/>
+        </div>
+
+        <div class="input-group">
             <label for="request_type">Request Type:</label>
             <select id="request_type" name="request_type">
                 <option value="GET">GET</option>
@@ -48,15 +53,16 @@
         <div class="input-group">
             <label for="datatype">Endpoint Data Type:</label>
             <select id="datatype" name="datatype">
-                <option value="json">JSON</option>
                 <option value="raw">Raw</option>
+                <option value="base64">base64</option>
+                <option value="json">JSON</option>
             </select>
         </div>
 
         <fieldset>
             <legend>Select Tests:</legend>
-            <label><input type="checkbox" name="XSS" /> Test 1</label>
-            <label><input type="checkbox" name="LFI" /> Test 2</label>
+            <label><input type="checkbox" name="XSS" /> XSS</label>
+            <label><input type="checkbox" name="pathTraversal" /> Path Traversal</label>
         </fieldset>
 
         <div class="button-group">

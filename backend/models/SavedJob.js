@@ -35,6 +35,10 @@ const SavedJob = sequelize.define('SavedJob', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  parameter: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   selectedTests: {
     type: DataTypes.TEXT,
     allowNull: false,
