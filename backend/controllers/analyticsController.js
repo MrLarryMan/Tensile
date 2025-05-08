@@ -5,8 +5,8 @@ exports.getJobResults = async (req, res) => {
     try {
         const jobResults = await JobResult.findAll({
             include: [
-                { model: SavedJob, as: 'savedJob' }, 
-                { model: Vulnerability, as: 'vulns' }] 
+                { model: SavedJob, as: 'savedJob', required: false}, 
+                { model: Vulnerability, as: 'vulns', required: false }] 
         });
         
         res.status(200).json(jobResults);
@@ -20,8 +20,8 @@ exports.getJobResultById = async (req, res) => {
     try {
         const jobResult = await JobResult.findByPk(id, {
             include: [
-                { model: SavedJob, as: 'savedJob' }, 
-                { model: Vulnerability, as: 'vulns' }] 
+                { model: SavedJob, as: 'savedJob', required: false }, 
+                { model: Vulnerability, as: 'vulns', required: false, }] 
             });
         if (!jobResult) {
             return res.status(404).json({ message: `Job result with id ${id} not found` });
@@ -46,3 +46,4 @@ exports.deleteJobResultById = async (req, res) => {
         res.status(500).json({ message: 'Error deleting job result', error });
     }
 }
+
