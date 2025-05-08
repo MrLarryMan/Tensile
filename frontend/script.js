@@ -25,3 +25,58 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+
+
+// Add this to your existing script.js
+function setupLogout() {
+  const accountBtn = document.querySelector(".account-btn");
+  if (accountBtn) {
+      accountBtn.addEventListener("click", async () => {
+          const username = localStorage.getItem("loggedInUser");
+          if (username) {
+              // Show logout option
+              const logout = confirm("Do you want to logout?");
+              if (logout) {
+                  try {
+                      const response = await fetch('/api/logout', {
+                          method: 'POST'
+                      });
+                      const data = await response.json();
+                      if (data.success) {
+                          localStorage.removeItem("loggedInUser");
+                          window.location.href = "login.html";
+                      }
+                  } catch (error) {
+                      console.error("Logout error:", error);
+                  }
+              }
+          } else {
+              window.location.href = "login.html";
+          }
+      });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  setupLogout();
+  
+  // auth status on protected pages
+  if (protectedPages.some(page => window.location.pathname.includes(page))) {
+      checkAuth();
+  }
+});
+
+async function checkAuth() {
+  try {
+      const response = await fetch('/api/check-auth');
+      const data = await response.json();
+      
+      if (!data.authenticated) {
+          window.location.href = "frontend/login.html";
+      }
+  } catch (error) {
+      console.error("Auth check error:", error);
+      window.location.href = "frontend/login.html";
+  }
+}
