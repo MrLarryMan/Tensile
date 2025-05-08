@@ -1,10 +1,10 @@
-const SavedJob = require('../models/SavedJob');
+const { Job } = require('../models');
 const { NotFoundError } = require('../errors');
 
 // GET: get all saved jobs
 exports.getSavedJobs = async (req, res, next) => {
   try {
-    const jobs = SavedJob.getAll();
+    const jobs = Job.findAll();
     res.json(jobs);
   } catch (err) {
     next(err);
@@ -14,7 +14,7 @@ exports.getSavedJobs = async (req, res, next) => {
 // GET: get single saved job -- by jobId
 exports.getSavedJob = async (req, res, next) => {
   try {
-    const job = SavedJob.getById(req.params.jobId);
+    const job = Job.findByPk(req.params.jobId);
     if (!job) {
       throw new NotFoundError('Job not found');
     }
@@ -27,7 +27,7 @@ exports.getSavedJob = async (req, res, next) => {
 // POST: create new saved job
 exports.createSavedJob = async (req, res, next) => {
   try {
-    const newJob = SavedJob.create(req.body);
+    const newJob = Job.create(req.body);
     res.status(201).json(newJob);
   } catch (err) {
     next(err);
@@ -37,7 +37,7 @@ exports.createSavedJob = async (req, res, next) => {
 // PUT: update saved job
 exports.updateSavedJob = async (req, res, next) => {
   try {
-    const updatedJob = SavedJob.update(req.params.jobId, req.body);
+    const updatedJob = Job.update(req.params.jobId, req.body);
     if (!updatedJob) {
       throw new NotFoundError('Job not found');
     }
