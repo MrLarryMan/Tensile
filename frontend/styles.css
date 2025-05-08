@@ -240,3 +240,25 @@ color: white;
 #edit-btn:hover {
 background-color: #005fa3;
 }
+
+.flex {
+    width: 30%;
+    min-width: fit-content;
+}
+
+
+
+#input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: auto;
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

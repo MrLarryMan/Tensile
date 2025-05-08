@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             await fetchJobs();
             detailsBox.style.display = "none";
+            
         } catch (error) {
             console.error("Error initializing page:", error);
             alert("Failed to load saved jobs. Please try again.");
