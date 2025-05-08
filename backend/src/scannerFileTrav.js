@@ -5,7 +5,7 @@ exports.fileTravScan = async (url, parameter, reqType, dataType) => {
         method: reqType,
     };
     let newUrl;
-    if(parameter) {
+    if(!parameter) {
         newUrl = url;
     } else {
         newUrl = url + `?${encodeURIComponent(parameter)}=`;
