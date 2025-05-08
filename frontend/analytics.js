@@ -176,9 +176,8 @@ async function updateJobSummaryInfo(jobData) {
     const passed_tests = jobData?.savedJob?.selectedTests?.length - jobData?.vulns?.length || 0;
     job_summary.innerHTML = ` ${passed_tests} out of ${jobData?.savedJob?.selectedTests?.length || 0} tests passed`;
     const job_information = document.getElementById("job-information");
-    job_information.innerHTML = `<strong>${jobData?.savedJob?.jobName || "Unknown Job"}</strong> | Ran on: ${new Date(jobData?.run_at)?.toLocaleDateString() || "Never"} found ${jobData?.vulns?.length} vulnerabilities.`;
+    job_information.innerHTML = `<strong>${jobData?.savedJob?.jobName || "Unknown Job"}</strong> | Ran on: ${new Date(Number(jobData?.run_at)?.toLocaleDateString() || "Never"} found ${jobData?.vulns?.length} vulnerabilities.`;
 }
-
 
 async function deleteJob(jobID) {
     try {
