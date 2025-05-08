@@ -1,9 +1,10 @@
 ### Tensile
 # Group 2 (Online)'s Project for CS 326 | UMass S2025
 
-Milestone 5 Slides: https://docs.google.com/presentation/d/10x4AWYZwSRQiX1iUwnJaYer0GjebVTNgct2YtyI6G84/
-Milestone 6 Slides: https://docs.google.com/presentation/d/1vff79JB6rgqe9MZ8YkBJ0jY7aVIFnR90nX1QICuMRgs/
-
+Milestone Slides: 
++ Milestone 5 Slides: https://docs.google.com/presentation/d/10x4AWYZwSRQiX1iUwnJaYer0GjebVTNgct2YtyI6G84/
++ Milestone 6 Slides: https://docs.google.com/presentation/d/1vff79JB6rgqe9MZ8YkBJ0jY7aVIFnR90nX1QICuMRgs/
++ Milestone 7 Slides: https://docs.google.com/presentation/d/1lbMxBYv6NhlfNC6ve2ew0KYeZ6JQyPaM0S50EoseU_U/
 # An Automated Web Vulnerability Scanner
 
 Problem: Web Application vulnerabilities are the most common form of security vulnerability, composing 25% of all breaches. They are difficult to detect as they require specialized training to understand and most web applications have wide surface areas.
