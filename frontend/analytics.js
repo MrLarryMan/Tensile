@@ -54,7 +54,7 @@ function buildHistoryGraph(run_ats, tests) {
         console.error("Graph context not found");
         return;
     }
-    const x_values = run_ats.map(run_at => new Date(run_at).toISOString());
+    const x_values = run_ats.map(run_at => new Date(Number(run_at)).toISOString());
     const y_values = tests.map(test => Object.values(test).reduce((acc, val) => acc + (val ? 1 : 0), 0));
     const data = {
         labels: x_values,
@@ -173,10 +173,10 @@ async function updateFailedTestInfo(vuln_id) {
 async function updateJobSummaryInfo(jobData) {
     const job_summary = document.getElementById("passed-info");
     console.log(jobData.selectedTests, jobData.vulns);
-    const passed_tests = jobData.savedJob.selectedTests.length - jobData.vulns.length
-    job_summary.innerHTML = ` ${passed_tests} out of ${jobData.savedJob.selectedTests.length} tests passed`;
+    const passed_tests = jobData?.savedJob?.selectedTests?.length - jobData?.vulns?.length || 0;
+    job_summary.innerHTML = ` ${passed_tests} out of ${jobData?.savedJob?.selectedTests?.length || 0} tests passed`;
     const job_information = document.getElementById("job-information");
-    job_information.innerHTML = `<strong>${jobData.savedJob.jobName}</strong> | Ran on: ${new Date(jobData.run_at).toLocaleDateString()} found ${jobData.vulns.length} vulnerabilities.`;
+    job_information.innerHTML = `<strong>${jobData?.savedJob?.jobName || "Unknown Job"}</strong> | Ran on: ${new Date(jobData?.run_at)?.toLocaleDateString() || "Never"} found ${jobData?.vulns?.length} vulnerabilities.`;
 }
 
 

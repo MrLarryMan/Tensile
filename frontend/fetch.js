@@ -20,8 +20,8 @@ export async function getInitialHistoryData() {
         data.forEach(jobResult => {
             d.jobIDs.push(jobResult["jobResultId"]); // Fixed object access
             d.run_at.push(jobResult["run_at"]);
-            d.vulns.push(jobResult["vulns"]);
-            d.jobNames.push(jobResult["savedJob"]["jobName"] || "Unknown Job"); 
+            d.vulns.push(jobResult["vulns"] || []);
+            d.jobNames.push(jobResult.savedJob?.jobName || "Unknown Job"); 
         });
 
         return d;
@@ -49,6 +49,7 @@ export async function getJobData(jobID) {
         return null; // Return null on error
     }
 }
+
 
 export async function deleteJobData(jobID) { 
     try {
