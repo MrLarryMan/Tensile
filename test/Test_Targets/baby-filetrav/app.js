@@ -5,13 +5,13 @@ const app = express();
 
 const PORT = 4000;
 
-// ❌ Directory that should be restricted
-const SAFE_DIR = path.join(__dirname, 'public');
-
-app.get('/download', (req, res) => {
+app.get('/file', (req, res) => {
+    if(!req.query.path) {
+        return res.send("No query!");
+    }
     const userPath = req.query.path;
 
-    const fullPath = path.join(SAFE_DIR, userPath);
+    const fullPath = path.join(__dirname, userPath);
 
     fs.readFile(fullPath, (err, data) => {
         if (err) {
@@ -22,5 +22,5 @@ app.get('/download', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Path traversal demo running at http://localhost:${PORT}`);
+    console.log(`Running at http://localhost:${PORT}`);
 });

@@ -3,17 +3,6 @@ const SavedJob = require('../models/SavedJob');
 const scannerXSS = require('./scannerXSS')
 const scannerFileTrav = require('./scannerFileTrav')
 
-// create a template of job results to initially save
-// TODO: FINISH
-function createJobResultTemplate(job) {
-    return {
-        "status": "Running",
-        "vulns": [],
-        "run_at": Date.now().toString(),
-        job
-    }
-}
-
 exports.jobStatus = async (resultId) => {
     const jobResult = await JobResult.findByPk(resultId);
     if (!jobResult) {
@@ -22,35 +11,48 @@ exports.jobStatus = async (resultId) => {
     return jobResult.status;
 }
 
-exports.runJob = (jobId) => {
-    const job = SavedJob.getById(jobId);
+exports.runJob = async (jobId) => {
+    const job = SavedJob.findByPk(jobId);
     const tests = job.test_options;
     for (const key in tests) {
         if (tests.hasOwnProperty(key)) { // Ensure it's not from the prototype chain
+            // TODO: Fix up this code, currently a little redundant
             if(key === "XSS" && tests[key] == true) {
-                let template = createJobResultTemplate(job);
-                const result = jobResultModel.create(template);
-                scannerXSS.xssScan(job.url + job.endpoint, job.parameter, job.requestType, job.dataType).then((vulns) => {
-                    template.status = "Finished";
-                    template.vulns = vulns; 
-                    jobResultModel.update(result.id, template);
-                }).catch((error) => {
-                    template.status = "Failed";
-                    jobResultModel.update(result.id, template);
+                const result = await JobResult.create({
+                    userId: -1,
+                    status: "Running",
+                    run_at: Date.now().toString(),
+                    vulns: []
+                  }, {
+                    include: [{ model: Vulnerability, as: 'vulns' }]
                 });
-                return result.id;
+                scannerXSS.xssScan(job.url + job.endpoint, job.parameter, job.requestType, job.dataType).then(async (vulns) => {
+                    result.status = "Finished";
+                    await result.createVuln(vulns);
+                    await result.save();
+                }).catch(async (error) => {
+                    result.status = "Failed";
+                    await result.save();
+                });
+                return result.jobResultId;
             } else if(key == "fileTraversal") {
-                let template = createJobResultTemplate(job);
-                const result = jobResultModel.create(template);
-                scannerFileTrav.FileTravScan(job.url + job.endpoint, job.parameter, job.requestType, job.dataType).then((vulns) => {
-                    template.status = "Finished";
-                    template.vulns = vulns; 
-                    jobResultModel.update(result.id, template);
-                }).catch((error) => {
-                    template.status = "Failed";
-                    jobResultModel.update(result.id, template);
+                const result = await JobResult.create({
+                    userId: -1,
+                    status: "Running",
+                    run_at: Date.now().toString(),
+                    vulns: []
+                  }, {
+                    include: [{ model: Vulnerability, as: 'vulns' }]
                 });
-                return result.id;
+                scannerFileTrav.fileTravScan(job.url + job.endpoint, job.parameter, job.requestType, job.dataType).then(async (vulns) => {
+                    result.status = "Finished";
+                    await result.createVuln(vulns);
+                    await result.save();
+                }).catch(async (error) => {
+                    result.status = "Failed";
+                    await result.save();
+                });
+                return result.jobResultId;
             }
         }
     }
@@ -60,8 +62,6 @@ exports.createAndRunJob = async (spec) => {
     let newJob;
     try {
         newJob = await SavedJob.create(spec);
-        const { url, endpoint, parameter, datatype, selectedTests } = req.body;
-
     } catch (err) {
         throw err;
     }

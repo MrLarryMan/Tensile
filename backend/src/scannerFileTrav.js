@@ -1,5 +1,5 @@
 // Try to access OS files. Assuming a linux server environment.
-exports.FileTravScan = async (url, parameter, reqType, dataType) => {
+exports.fileTravScan = async (url, parameter, reqType, dataType) => {
     // We ignore dataType for this type of test.
 
     const options = {
