@@ -7,14 +7,14 @@ const SavedJob = sequelize.define('SavedJob', {
     primaryKey: true,
     autoIncrement: true,
   },
-  // userId: {
-  //   type: DataTypes.INTEGER,
-  //   references: {
-  //     model: 'user',
-  //     key: 'userId'
-  //   },
-  //   allowNull: false,
-  // },
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'user',
+      key: 'userId'
+    },
+    allowNull: true,
+  },
   jobResultId: {
     type: DataTypes.INTEGER,
     references: {
@@ -25,7 +25,7 @@ const SavedJob = sequelize.define('SavedJob', {
   },
   jobName: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   url: {
     type: DataTypes.STRING,
@@ -47,7 +47,8 @@ const SavedJob = sequelize.define('SavedJob', {
     type: DataTypes.TEXT,
     allowNull: false,
     get() {
-      return JSON.parse(this.getDataValue('selectedTests'));
+      const raw = this.getDataValue('selectedTests');
+      return raw ? JSON.parse(raw) : ["No Tests Found"];
     },
     set(val) {
       this.setDataValue('selectedTests', JSON.stringify(val));

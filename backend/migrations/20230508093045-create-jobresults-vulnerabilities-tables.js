@@ -77,17 +77,17 @@ module.exports  = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL'
             },
-            // userId: {
-            //     type: Sequelize.INTEGER,
-            //     references: {
-            //         model: 'users',
-            //         key: 'userId'
-            //     },
-            //     allowNull: false,
-            // },
+            userId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'users',
+                    key: 'userId'
+                },
+                allowNull: true,
+            },
             jobName: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
             },
             url: {
                 type: Sequelize.STRING,

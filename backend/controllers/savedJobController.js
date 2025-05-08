@@ -37,7 +37,10 @@ exports.createSavedJob = async (req, res, next) => {
 // PUT: update saved job
 exports.updateSavedJob = async (req, res, next) => {
   try {
-    const updatedJob = await SavedJob.update(req.params.jobId, req.body);
+    const updatedJob = await SavedJob.update(
+      req.body, 
+      { where: { jobId: req.params.jobId } }
+    );
     if (!updatedJob) {
       throw new NotFoundError('Job not found');
     }
@@ -50,7 +53,9 @@ exports.updateSavedJob = async (req, res, next) => {
 // DELETE: delete saved job
 exports.deleteSavedJob = async (req, res, next) => {
   try {
-    const success = await SavedJob.delete(req.params.jobId);
+    const success = await SavedJob.destroy({
+      where: { jobId: req.params.jobId}
+    });
     if (!success) {
       throw new NotFoundError('Job not found');
     }

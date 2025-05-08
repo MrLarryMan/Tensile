@@ -40,7 +40,7 @@ module.exports = {
         jobName: 'Test Job 1',
         url: 'https://example.com/job1',
         endpoint: '/api/job1',
-        parameter: null,
+        parameter: 'name6436',
         selectedTests: JSON.stringify(['pathTraversal']),
         datatype: 'raw',
         createdAt: new Date(),
