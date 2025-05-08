@@ -3,6 +3,7 @@ const path = require('path');
 const jobRoutes = require('../routes/jobRoutes');
 const savedJobRoutes = require('../routes/savedJobRoutes');
 const analyticsRoutes = require('../routes/analyticsRoutes');
+const scannerRoutes = require('../routes/scannerRoutes');
 const testRoutes = require('../routes/testRoutes');
 const sequelize = require('../sequelize');
 const { Job, JobResult, Vulnerability } = require('../models');
@@ -14,14 +15,14 @@ const PORT = process.env.PORT || 3000;
 
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // API routes
 app.use('/api/jobs', jobRoutes);
 app.use('/api/saved-jobs', savedJobRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/tests', testRoutes);
-
-
+app.use('/api/jobrun', scannerRoutes);
 
 // Serve the frontend
 app.use(express.static(path.join(__dirname, '../../frontend')));

@@ -15,9 +15,9 @@ exports.getJobById = async (req, res) => {
 
 // POST /api/jobs
 exports.createJob = async (req, res) => {
-  const { url, endpoint, parameter, datatype, selectedTests } = req.body;
+  const { url, endpoint, requestType, parameter, datatype, selectedTests } = req.body;
   if (!url || !endpoint) return res.status(400).json({ error: 'URL and endpoint required' });
-  if (!request_type) return res.status(400).json({ error: 'Request type required' });
+  if (!requestType) return res.status(400).json({ error: 'Request type required' });
   try { new URL(url); } catch { return res.status(400).json({ error: 'Invalid URL' }); }
   if (!endpoint.startsWith('/') || /\s/.test(endpoint)) {
     return res.status(400).json({ error: 'Endpoint must start with "/" and contain no spaces' });
@@ -25,7 +25,7 @@ exports.createJob = async (req, res) => {
   if (/\s/.test(parameter)) {
     return res.status(400).json({ error: 'Parameter must contain no spaces' });
   }
-  const job = await Job.create({ url, endpoint, parameter, datatype, selectedTests });
+  const job = await Job.create({ url, endpoint, requestType, parameter, datatype, selectedTests });
   res.status(201).json(job);
 };
 

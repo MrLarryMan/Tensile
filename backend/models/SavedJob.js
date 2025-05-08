@@ -7,27 +7,31 @@ const SavedJob = sequelize.define('SavedJob', {
     primaryKey: true,
     autoIncrement: true,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'user',
-      key: 'userId'
-    },
-    allowNull: false,
-  },
+  // userId: {
+  //   type: DataTypes.INTEGER,
+  //   references: {
+  //     model: 'user',
+  //     key: 'userId'
+  //   },
+  //   allowNull: false,
+  // },
   jobResultId: {
     type: DataTypes.INTEGER,
     references: {
       model: 'jobResults',
       key: 'jobResultId'
     },
-    allowNull: false,
+    allowNull: true,
   },
   jobName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   url: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  requestType: {
     type: DataTypes.STRING,
     allowNull: false,
   },

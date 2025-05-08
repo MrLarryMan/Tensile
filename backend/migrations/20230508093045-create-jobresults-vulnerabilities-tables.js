@@ -15,7 +15,7 @@ module.exports  = {
                     model: 'users',
                     key: 'userId'
                 },
-                allowNull: false,
+                allowNull: true,
             },
             status: {
                 type: Sequelize.STRING,
@@ -77,14 +77,14 @@ module.exports  = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL'
             },
-            userId: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'users',
-                    key: 'userId'
-                },
-                allowNull: false,
-            },
+            // userId: {
+            //     type: Sequelize.INTEGER,
+            //     references: {
+            //         model: 'users',
+            //         key: 'userId'
+            //     },
+            //     allowNull: false,
+            // },
             jobName: {
                 type: Sequelize.STRING,
                 allowNull: false,
@@ -94,6 +94,10 @@ module.exports  = {
                 allowNull: false,
             },
             endpoint: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            requestType: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
