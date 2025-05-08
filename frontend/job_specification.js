@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Input fields and checkboxes references
     const urlInput = document.getElementById("url");
     const endpointInput = document.getElementById("endpoint");
+    const parameterInput = document.getElementById("parameter");
     const requestTypeSelect = document.getElementById("request_type");
     const datatypeSelect = document.getElementById("datatype");
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -26,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return endpoint.startsWith("/") && !/\s/.test(endpoint);
     }
 
+    // // Helper for endpoint validation
+    // function isValidParameter(parameter) {
+    //     return parameter == null || !/\s/.test(parameter);
+    // }
+
     // Helper for showing messages
     function showMessage(msg, isError = false) {
         let msgDiv = document.getElementById("job-msg");
@@ -43,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     runBtn.addEventListener("click", function () {
         const url = urlInput.value.trim();
         const endpoint = endpointInput.value.trim();
+        const parameter = parameterInput.value.trim();
+        parameter = parameter == "" ? null : parameter;
         const requestType = requestTypeSelect.value;
         const datatype = datatypeSelect.value;
         const selectedTests = Array.from(checkboxes)
@@ -62,6 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // if (!isValidParameter(parameter)) {
+        //     showMessage("Please enter a valid parameter, or leave it blank if non-applicable. Parameters must contain no spaces.", true);
+        //     return;
+        // }
+
         showMessage("Ready to run tests!");
         // console.log("Running tests with the following details:");
         // console.log("URL:", url);
@@ -74,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             body: {
                 url: url,
                 endpoint: endpoint,
+                parameter: parameter,
                 request_type: requestType,
                 test_options: selectedTests,
                 datatype: datatype

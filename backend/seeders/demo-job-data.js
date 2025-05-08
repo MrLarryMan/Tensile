@@ -40,8 +40,9 @@ module.exports = {
         jobName: 'Test Job 1',
         url: 'https://example.com/job1',
         endpoint: '/api/job1',
-        selectedTests: JSON.stringify(['test1', 'test2']),
-        datatype: 'json',
+        parameter: null,
+        selectedTests: JSON.stringify(['pathTraversal']),
+        datatype: 'raw',
         createdAt: new Date(),
       },
       {
@@ -49,9 +50,10 @@ module.exports = {
         jobResultId: 2,
         jobName: 'Test Job 2',
         url: 'https://example.com/job2',
-        endpoint: '/api/job2',
-        selectedTests: JSON.stringify(['test3', 'test4']),
-        datatype: 'xml',
+        endpoint: '/api/name',
+        parameter: 'name',
+        selectedTests: JSON.stringify(['XSS']),
+        datatype: 'base64',
         createdAt: new Date(),
      }, 
     ], {});
@@ -60,17 +62,12 @@ module.exports = {
 
     await queryInterface.bulkInsert('vulns', [
       {
-        category: 'SQL Injection',
-        payload: 'SELECT * FROM users WHERE id = 1 OR 1=1',
-        recommendations: 'Use parameterized queries to prevent SQL injection attacks.',
+        category: 'Path Traversal',
+        payload: '../../../etc/shadow',
+        recommendations: 'Review the allowed routes of your website, and make sure that only intended directories are included. Sanitize filepaths and avoid user-inputted filepaths.',
         jobResultId: 1,
       },
       {
-        category: 'Cross-Site Scripting (XSS)',
-        payload: '<script>alert("XSS")</script>',
-        recommendations: 'Use proper escaping and sanitization to prevent XSS attacks.',
-        jobResultId: 1,
-      }, {
         category: 'Cross-Site Scripting (XSS)',
         payload: '<script>alert("XSS")</script>',
         recommendations: 'Use proper escaping and sanitization to prevent XSS attacks.',
